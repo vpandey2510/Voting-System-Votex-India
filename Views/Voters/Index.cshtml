@@ -1,0 +1,98 @@
+﻿@model IEnumerable<VotingSystem.Models.Voter>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eligible)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.Name)
+            </td>
+                <td>
+                    <input type="checkbox" class="verify-checkbox" data-id="@item.VoterID"
+                    @(item.Eligible ? "checked" : "") />
+                </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.VoterID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VoterID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.verify-checkbox').on('change', function () {
+                var voterId = $(this).data('id');
+                var isVerified = $(this).is(':checked');
+                var token = $('input[name="__RequestVerificationToken"]').val();
+
+                $.ajax({
+                    url: '@Url.Action("VerifyEligibility", "Voters")',
+                    type: 'POST',
+                    data: {
+                        id: voterId,
+                        isEligible: isVerified,
+                        __RequestVerificationToken: token
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            alert('Verification status updated successfully.');
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function () {
+                        alert('Error updating verification status.');
+                    }
+                });
+            });
+        });
+    </script>
+}

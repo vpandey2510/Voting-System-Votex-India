@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Vote Cast Successfully";
+}
+
+<h2>Your vote has been successfully cast!</h2>
+
+<div>
+    <p>Thank you for voting. You can now view the total votes by area.</p>
+
+    <form asp-action="GetTotalVotes" method="get">
+        <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
+        <button type="submit">View Vote Counts</button>
+    </form>

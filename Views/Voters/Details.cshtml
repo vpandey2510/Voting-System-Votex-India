@@ -1,0 +1,56 @@
+﻿@model VotingSystem.Models.Voter
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Voter</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Area.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Eligible)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Eligible)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Voter"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.VoterID">Edit</a>
+    }
+</div>

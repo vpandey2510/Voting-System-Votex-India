@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Total Votes";
+}
+
+<h2>Total Votes for Candidate</h2>
+
+<div id="totalVotes">
+    <p>Loading total votes...</p>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Retrieve candidateId and electionId from ViewBag
+            const candidateId = @ViewBag.CandidateId;
+            const electionId = @ViewBag.ElectionId;
+
+            // Fetch total votes using AJAX
+            fetch(`/Votes/GetTotalVotes?candidateId=${candidateId}&electionId=${electionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("totalVotes").innerHTML = `
+                        <p>Candidate ID: ${data.candidateId}</p>
+                        <p>Total Votes: ${data.totalVotes}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error("Error fetching vote count:", error);
+                    document.getElementById("totalVotes").innerHTML = "<p>Error loading total votes.</p>";
+                });
+        });
+    </script>
+}

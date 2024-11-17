@@ -1,0 +1,44 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<style>
+        body {
+            background-color: #f0f4f8; /* Light pastel blue */
+            color: #333;
+            font-family: 'Poppins', sans-serif !important;
+        }
+
+        .confirm-register{
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: black; /* Pastel gray */
+        }
+</style>
+
+<div class="confirm-register">
+
+    <h1>@ViewData["Title"]</h1>
+
+    @{
+        if (@Model.DisplayConfirmAccountLink)
+        {
+            <p>
+                <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+            </p>
+        }
+        else
+        {
+            <p>
+                Please check your email to confirm your account.
+            </p>
+        }
+    }
+</div>
+
+

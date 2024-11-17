@@ -1,0 +1,58 @@
+﻿@model VotingSystem.Models.Election
+
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    .election-details-card {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 50px;
+    }
+    h2 {
+        color: black; /* Pastel gray */
+    }
+    .btn-primary {
+        background-color: #6c63ff; /* Pastel violet */
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #5a54e1; /* Darker shade for hover */
+    }
+    .btn-danger {
+        background-color: #dc3545; /* Bootstrap danger color */
+        border: none;
+    }
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker shade for hover */
+    }
+</style>
+
+
+    <div class="container">
+        <div class="election-details-card">
+            <h2>@Model.Name</h2>
+
+            <p><strong>Status:</strong> @Model.Status</p>
+            <p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
+            <p><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</p>
+            <p><strong>Description:</strong> @Model.Description</p>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="mt-4">
+                    <a href="@Url.Action("Edit", "Elections", new { id = Model.ElectionID })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", "Elections", new { id = Model.ElectionID })" class="btn btn-danger">Delete</a>
+                </div>
+            }
+
+            <div class="mt-4">
+                <a href="@Url.Action("Index", "Elections")" class="btn btn-secondary">Back to Elections</a>
+            </div>
+
+        </div>
+    </div>

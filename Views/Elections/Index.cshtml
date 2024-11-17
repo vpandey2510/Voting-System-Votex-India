@@ -1,0 +1,193 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<VotingSystem.Models.Election>
+
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
+
+    /* Container and header styling */
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card-container {
+        margin-top: 20px;
+        /*width: 116% !important;*/
+    }
+
+    .election-card {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        /*padding: 10px;*/
+        transition: transform 0.2s;
+        margin-bottom: 30px;
+        width: auto;
+    }
+
+        .election-card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+    #electionCards {
+        display: flex;
+        flex-wrap: wrap; /* Allows cards to wrap onto the next line */
+        margin-top: 20px; /* Adds space above the card container */
+        justify-content: space-around;
+    }
+
+    h2 {
+        color: black; /* Pastel gray */
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    h5.card-title {
+        padding-bottom: 20px;
+    }
+
+    /* Filter buttons and Create button styling */
+    .action-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #6c63ff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a55d6;
+        }
+
+   
+    /* Custom styles for the dropdown form to resemble a button */
+    .dropdown-form {
+        display: inline-block; /* Keep the form inline with other elements */
+        position: relative; /* Positioning context for absolute elements */
+    }
+
+    .dropdown-select {
+        appearance: none; /* Remove default styling */
+        background-color: #6c63ff; /* Bootstrap primary color */
+        color: white; /* Text color */
+        border: none; /* No border */
+        padding: 10px 20px; /* Padding for the dropdown */
+        border-radius: 20px; /* Rounded corners */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Hand cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition for background color */
+    }
+
+        /* Change background color on hover */
+        .dropdown-select:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        /* Add an arrow indicator to the dropdown */
+        .dropdown-select::after {
+            content: '▼'; /* Arrow down symbol */
+            position: absolute; /* Position it absolutely within the form */
+            right: 10px; /* Right padding */
+            top: 50%; /* Center it vertically */
+            transform: translateY(-50%); /* Adjust for vertical centering */
+            pointer-events: none; /* Prevent interaction */
+        }
+
+    .container, .container-lg, .container-md, .container-sm, .container-xl
+    {
+        max-width: 1200px !important;
+    }
+
+    
+</style>
+
+<div class="container">
+    <h2>Elections</h2>
+
+    <div class="action-container justify-content-between">
+        @if (User.IsInRole("Admin"))
+        {
+            <div id="create">
+                <a asp-action="Create" class="btn btn-primary">Create New Election</a>
+            </div>
+        }
+        <div>
+            <button class="btn btn-primary btn-filter" onclick="filterElections('Open')">Open Elections</button>
+            <button class="btn btn-primary btn-filter" onclick="filterElections('Closed')">Closed Elections</button>
+            <button class="btn btn-primary btn-filter" onclick="filterElections('Upcoming')">Upcoming Elections</button>
+            <button class="btn btn-primary btn-filter" onclick="filterElections('All')">All Elections</button>
+        </div>
+    </div>
+
+
+    <div class="row card-container" id="electionCards">
+        @if (!SignInManager.IsSignedIn(User) || SignInManager.IsSignedIn(User))
+        {
+            foreach (var election in Model)
+            {
+                <div class="card col-md-4 election-card" data-status="@election.Status">
+                    
+                        <div class="card-body">
+                            <h5 class="card-title">@election.Name</h5>
+                            <p class="card-text">Status: @election.Status</p>
+                            <p class="card-text">Start Date: @election.StartDate.ToShortDateString()</p>
+                            <a href="@Url.Action("Details", "Elections", new { id = election.ElectionID })" class="btn btn-primary">View Details</a>
+                            @if (!SignInManager.IsSignedIn(User))
+                            {
+                                <a id="vote" asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Vote</a>
+                            }
+                            @if (User.IsInRole("Voter"))
+                                {
+                                    <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = election.ElectionID })" class="btn btn-primary">Vote</a>
+                                }
+                            
+                            @if(User.IsInRole("Admin"))
+                                    {
+                                        <form asp-action="ChangeStatus" method="post" id="statusForm_@election.ElectionID" class="dropdown-form">
+                                            <input type="hidden" name="id" value="@election.ElectionID" />
+                                             <select name="status" class="dropdown-select" onchange="this.form.submit()" required>
+                                                <option value="">Change Status</option>
+                                                <option value="Open">Open</option>
+                                                <option value="Closed">Closed</option>
+                                                <option value="Upcoming">Upcoming</option>
+                                            </select>
+                                        </form>
+                                    }
+                        </div>
+                    
+                </div>
+            }
+        }
+        
+    </div>
+</div>
+
+<script>
+    function filterElections(status) {
+        const cards = document.querySelectorAll('.election-card');
+        cards.forEach(card => {
+            if (status === 'All') {
+                card.style.display = 'block'; // Show all cards
+            } else {
+                const cardStatus = card.getAttribute('data-status');
+                card.style.display = cardStatus === status ? 'block' : 'none'; // Show or hide based on status
+            }
+        });
+    }
+</script>

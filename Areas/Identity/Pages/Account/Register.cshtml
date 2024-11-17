@@ -1,0 +1,95 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
+
+    .register-container {
+        background-color: #ffffff; /* White background for the form */
+        border-radius: 10px;
+        width: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 50px;
+    }
+
+    h1, h2 {
+        color: black; /* Pastel gray */
+    }
+
+    .form-floating > label {
+        color: #6c757d; /* Pastel gray */
+    }
+
+    .form-control {
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #6c63ff; /* Pastel violet */
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a54e1; /* Darker shade for hover */
+        }
+
+    .text-danger {
+        font-size: 0.9rem;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 register-container">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2>Create a New Account</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="Input.UserType" class="form-control" autocomplete="usertype" aria-required="true" placeholder="Choose your Role">
+                        <option value="Admin">Admin</option>
+                        <option value="Candidate">Candidate</option>
+                        <option value="Voter">Voter</option>
+                    </select>
+                    <label asp-for="Input.UserType">User Type</label>
+                    <span asp-validation-for="Input.UserType" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email"></label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <label asp-for="Input.Password"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

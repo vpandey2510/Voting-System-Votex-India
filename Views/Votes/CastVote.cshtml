@@ -1,0 +1,32 @@
+﻿@model IEnumerable<VotingSystem.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Cast Your Vote";
+}
+
+<h2>Cast Your Vote</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-action="CastVote" method="post">
+        <!-- Election ID hidden field for form submission -->
+        <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
+
+        <div class="form-group">
+            <label for="candidateId">Select Candidate:</label>
+            <select name="candidateId" class="form-control" required>
+                <option value="">-- Choose a Candidate --</option>
+                @foreach (var candidate in Model)
+                {
+                    <option value="@candidate.CandidateID">@candidate.Name - @candidate.Party.Name</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Vote</button>
+    </form>
+}
+else
+{
+    <p>Please log in to cast your vote.</p>
+}

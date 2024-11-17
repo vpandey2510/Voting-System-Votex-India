@@ -1,0 +1,144 @@
+﻿@*
+    @model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Total Votes by Election and Candidate";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No elections available.</p>
+}
+else
+{
+    foreach (var election in Model)
+    {
+        <h3>Election: @election.ElectionName</h3>
+
+        @if (election.Candidates.Count == 0)
+        {
+            <p>No Candidates</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <th>Total Votes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var candidate in election.Candidates)
+                    {
+                        <tr>
+                            <td>@candidate.CandidateName</td>
+                            <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+}
+*@
+
+@*
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Election Result";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No elections available.</p>
+}
+else
+{
+    foreach (var election in Model)
+    {
+        <h3>Election: @election.ElectionName (@election.Status)</h3>
+
+        @if (election.Candidates.Count == 0)
+        {
+            <p>No Candidates</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <th>Total Votes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var candidate in election.Candidates)
+                    {
+                        <tr>
+                            <td>@candidate.CandidateName</td>
+                            <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+}
+
+*@
+
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Election Result";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No elections available.</p>
+}
+else
+{
+    foreach (var election in Model)
+    {
+        <h3>@election.ElectionName (@election.Status)</h3>
+
+        if (election.CandidatesByArea.Count == 0)
+        {
+            <p>No Candidates</p>
+        }
+        else
+        {
+            foreach (var areaGroup in election.CandidatesByArea)
+            {
+                <h4>@areaGroup.AreaName</h4>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Candidate Name</th>
+                            <th>Total Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var candidate in areaGroup.Candidates)
+                        {
+                            <tr>
+                                <td>@candidate.CandidateName</td>
+                                <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        }
+    }
+}
