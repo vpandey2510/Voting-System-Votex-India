@@ -46,6 +46,9 @@ namespace VotingSystem.Controllers
         public IActionResult Create()
         {
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name");
+
+            var voter = new Voter();
+
             return View();
         }
 
@@ -54,13 +57,52 @@ namespace VotingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VoterID,Name,Age,Gender,Username,AreaID")] Voter voter)
+        public async Task<IActionResult> Create([Bind("VoterID,Name,VoterImagePath,Age,Gender,Username,AreaID")] Voter voter, IFormFile? voterImage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(voter);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details", new { id = voter.VoterID });
+                try
+                {
+                    // Handle flag image upload
+                    if (voterImage != null && voterImage.Length > 0)
+                    {
+
+                        Console.WriteLine("Entering if loop for image verification");
+                        var uploadsFolder = Path.Combine("wwwroot/images/voters");
+                        var fileName = Path.GetFileName(voterImage.FileName);
+
+                        // Ensure the folder exists
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        var filePath = Path.Combine(uploadsFolder, fileName);
+
+                        // Save the file to the server
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await voterImage.CopyToAsync(stream);
+                        }
+
+                        // Set the FlagImagePath
+                        voter.VoterImagePath = $"/images/voters/{fileName}";
+                        Console.WriteLine($"Voter Image Path: {voter.VoterImagePath}");
+                    }
+
+                    _context.Add(voter);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", new { id = voter.VoterID });
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the error (you can use a logging framework here)
+                    Console.WriteLine($"Error while creating Voter: {ex.Message}");
+
+                    // Optionally, add a model state error to display on the view
+                    ModelState.AddModelError("", "An error occurred while creating the voter.");
+                }
             }
 
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", voter.AreaID);
@@ -92,37 +134,87 @@ namespace VotingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VoterID,Name,Age,Gender,Username,AreaID")] Voter voter)
+        public async Task<IActionResult> Edit(int id, [Bind("VoterID,Name,Age,Gender,Username,AreaID")] Voter voter, IFormFile? voterImage)
         {
             if (id != voter.VoterID)
+            {
+                return BadRequest("Mismatched Voter ID.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // Reload dropdowns in case of an error
+                
+                ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", voter.AreaID);
+                return View(voter);
+            }
+
+            var existingVoter = await _context.Voters.FindAsync(id);
+            if (existingVoter == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                // Update properties
+                existingVoter.Name = voter.Name;
+                existingVoter.Age = voter.Age;
+                existingVoter.Gender = voter.Gender;
+                existingVoter.AreaID = voter.AreaID;
+
+                existingVoter.Eligible = false;
+
+                // Handle candidate image upload
+                if (voterImage != null && voterImage.Length > 0)
                 {
-                    _context.Update(voter);
-                    await _context.SaveChangesAsync();
+                    var uploadsFolder = Path.Combine("wwwroot/images/voters");
+                    var fileName = Path.GetFileName(voterImage.FileName);
+
+                    // Ensure the folder exists
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    // Save the file
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await voterImage.CopyToAsync(stream);
+                    }
+
+                    // Update the image path
+                    existingVoter.VoterImagePath = $"/images/voters/{fileName}";
                 }
-                catch (DbUpdateConcurrencyException)
+
+                else
                 {
-                    if (!VoterExists(voter.VoterID))
+                    // If no new image is uploaded, retain the old image path if it exists
+                    if (existingVoter.VoterImagePath == null)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        existingVoter.VoterImagePath = string.Empty;
                     }
                 }
+
+                // Save changes
+                _context.Update(existingVoter);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", new { id = voter.VoterID });
             }
-
-            ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", voter.AreaID);
-
-            return View(voter);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VoterExists(voter.VoterID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         // GET: Voters/Delete/5
@@ -161,7 +253,7 @@ namespace VotingSystem.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
         private bool VoterExists(int id)

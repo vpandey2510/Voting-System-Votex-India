@@ -58,13 +58,52 @@ namespace VotingSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("Name,StartDate,EndDate,Status,Description")] Election election)
+        public async Task<IActionResult> Create([Bind("Name,ElectionImagePath,StartDate,EndDate,Status,Description")] Election election, IFormFile? electionImage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(election);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // Handle flag image upload
+                    if (electionImage != null && electionImage.Length > 0)
+                    {
+
+                        Console.WriteLine("Entering if loop for image verification");
+                        var uploadsFolder = Path.Combine("wwwroot/images/elections");
+                        var fileName = Path.GetFileName(electionImage.FileName);
+
+                        // Ensure the folder exists
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        var filePath = Path.Combine(uploadsFolder, fileName);
+
+                        // Save the file to the server
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await electionImage.CopyToAsync(stream);
+                        }
+
+                        // Set the FlagImagePath
+                        election.ElectionImagePath = $"/images/elections/{fileName}";
+                        Console.WriteLine($"Election Path: {election.ElectionImagePath}");
+                    }
+
+                    _context.Add(election);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the error (you can use a logging framework here)
+                    Console.WriteLine($"Error while creating party: {ex.Message}");
+
+                    // Optionally, add a model state error to display on the view
+                    ModelState.AddModelError("", "An error occurred while creating the party.");
+                }
             }
             return View(election);
         }
@@ -91,34 +130,83 @@ namespace VotingSystem.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("ElectionID,Name,StartDate,EndDate,Status,Description")] Election election)
+        public async Task<IActionResult> Edit(int id, [Bind("ElectionID,Name,StartDate,EndDate,Status,Description")] Election election, IFormFile? electionImage)
         {
             if (id != election.ElectionID)
+            {
+                return BadRequest("Mismatched Election ID.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(election);
+            }
+
+            var existingElection = await _context.Elections.FindAsync(id);
+            if (existingElection == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                // Update basic properties
+                existingElection.Name = election.Name;
+                existingElection.Status = election.Status;
+                existingElection.StartDate = election.StartDate;
+                existingElection.EndDate = election.EndDate;
+                existingElection.Description = election.Description;
+
+                // Handle flag image upload
+                if (electionImage != null && electionImage.Length > 0)
                 {
-                    _context.Update(election);
-                    await _context.SaveChangesAsync();
+                    var uploadsFolder = Path.Combine("wwwroot/images/elections");
+                    var fileName = Path.GetFileName(electionImage.FileName);
+
+                    // Ensure the folder exists
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    // Save the file
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await electionImage.CopyToAsync(stream);
+                    }
+
+                    // Update FlagImagePath
+                    existingElection.ElectionImagePath = $"/images/elections/{fileName}";
                 }
-                catch (DbUpdateConcurrencyException)
+
+                else
                 {
-                    if (!ElectionExists(election.ElectionID))
+                    // If no new image is uploaded, retain the old image path if it exists
+                    if (existingElection.ElectionImagePath == null)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        existingElection.ElectionImagePath = string.Empty;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                // Save changes
+                _context.Update(existingElection);
+                await _context.SaveChangesAsync();
             }
-            return View(election);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ElectionExists(election.ElectionID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Election/Delete/5

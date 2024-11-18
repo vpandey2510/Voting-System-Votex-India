@@ -24,22 +24,39 @@ namespace VotingSystem.Controllers
         // Display form to cast vote for candidates in voter's area
         public async Task<IActionResult> CastVoteForm(int? electionId)
         {
+            if (electionId == null)
+            {
+                return NotFound("Election ID is required.");
+            }
+
             var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
             var voter = await _context.Voters.FirstOrDefaultAsync(v => v.Username == userEmail);
 
             if (voter == null || !voter.Eligible)
             {
-                _logger.LogWarning("Non-eligible voter attempted to vote: {UserEmail}", userEmail);
                 return Unauthorized("You are not eligible to vote.");
             }
 
-            // Fetch candidates only from the voter's area
             var candidates = await _context.Candidates
+                .Include(c => c.Party) // Include related Party data
                 .Where(c => c.ElectionID == electionId && c.AreaID == voter.AreaID)
                 .ToListAsync();
 
+            if (candidates == null || !candidates.Any())
+            {
+                _logger.LogWarning("No candidates found for ElectionID: {ElectionID}, AreaID: {AreaID}", electionId, voter.AreaID);
+            }
+            else
+            {
+                foreach (var candidate in candidates)
+                {
+                    _logger.LogInformation("Candidate: {Name}, Position: {Position}, Party: {Party}, Image: {Image}",
+                        candidate.Name, candidate.Position, candidate.Party?.Name, candidate.CandidateImagePath);
+                }
+            }
+
             // Pass the ElectionID and list of candidates to the view
-            ViewData["ElectionID"] = electionId;
+            ViewData["ElectionId"] = electionId;
             return View(candidates); // Pass the candidates directly to the view
         }
 
@@ -78,7 +95,9 @@ namespace VotingSystem.Controllers
             bool hasVoted = await _context.Votes.AnyAsync(v => v.VoterHashID == voterHash && v.ElectionID == electionId);
             if (hasVoted)
             {
-                return BadRequest("You have already voted in this election.");
+                ViewBag.Message = "You have already voted in this election.";
+                ViewBag.ElectionId = electionId;
+                return View("CastVoteSuccess");
             }
 
             var vote = new Vote
@@ -94,6 +113,7 @@ namespace VotingSystem.Controllers
             if (result > 0)
             {
                 _logger.LogInformation("Voter {VoterHash} successfully cast a vote for candidate {CandidateId} in election {ElectionId}.", voterHash, candidateId, electionId);
+                ViewBag.Message = "Your vote has been successfully cast!";
                 return RedirectToAction("CastVoteSuccess");
             }
             else
@@ -103,47 +123,50 @@ namespace VotingSystem.Controllers
             }
         }
 
-        // Get Total Votes per Candidate and Area for an Election
-        public async Task<IActionResult> GetTotalVotes()
+        
+
+        public async Task<IActionResult> GetTotalVotes(int? electionId = 1, int? areaId = 1)
         {
-            // Retrieve elections with their respective candidates and vote counts
-            var elections = await _context.Elections
-                .Select(election => new
+
+            var elections = await _context.Elections.ToListAsync();
+            var areas = await _context.Areas.ToListAsync(); // Assuming areas are stored in Areas table
+
+            var candidatesQuery = _context.Candidates
+                .Include(c => c.Area)
+                .Include(c => c.Party)
+                .Include(c => c.Election)
+                .Select(candidate => new
                 {
-                    ElectionID = election.ElectionID,
-                    ElectionName = election.Name,
-                    Status = election.Status,
-                    CandidatesByArea = _context.Candidates
-                        .Where(candidate => candidate.ElectionID == election.ElectionID)
-                        .GroupBy(candidate => new { candidate.AreaID, candidate.Area.Name })
-                        .Select(areaGroup => new
-                        {
-                            AreaID = areaGroup.Key.AreaID,
-                            AreaName = areaGroup.Key.Name,
-                            Candidates = areaGroup
-                                .Select(candidate => new
-                                {
-                                    CandidateID = candidate.CandidateID,
-                                    CandidateName = candidate.Name,
-                                    TotalVotes = _context.Votes.Count(vote => vote.CandidateID == candidate.CandidateID)
-                                })
-                                .OrderByDescending(c => c.TotalVotes)
-                                .ToList()
-                        })
-                        .ToList()
-                })
+                    CandidateID = candidate.CandidateID,
+                    CandidateName = candidate.Name,
+                    AreaID = candidate.AreaID,
+                    AreaName = candidate.Area.Name,
+                    PartyID = candidate.PartyID,
+                    PartyName = candidate.Party.Name,
+                    ElectionID = candidate.ElectionID,
+                    ElectionName = candidate.Election.Name,
+                    TotalVotes = _context.Votes.Count(v => v.CandidateID == candidate.CandidateID)
+                });
+
+            // Apply filters if provided
+            if (electionId.HasValue)
+                candidatesQuery = candidatesQuery.Where(c => c.ElectionID == electionId.Value);
+
+            if (areaId.HasValue)
+                candidatesQuery = candidatesQuery.Where(c => c.AreaID == areaId.Value);
+
+            var candidates = await candidatesQuery
+                .OrderByDescending(c => c.TotalVotes) // Sort by descending votes
                 .ToListAsync();
 
-            var electionResults = elections.Select(e => new
-            {
-                ElectionID = e.ElectionID,
-                ElectionName = e.ElectionName,
-                Status = e.Status,
-                CandidatesByArea = e.CandidatesByArea
-            }).ToList();
+            ViewData["Elections"] = elections;
+            ViewData["Areas"] = areas;
+            ViewData["SelectedElection"] = electionId;
+            ViewData["SelectedArea"] = areaId;
 
-            return View("Results", electionResults);
-
+            return View("Results", candidates);
         }
+
+
     }
 }

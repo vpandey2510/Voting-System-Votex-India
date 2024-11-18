@@ -4,54 +4,83 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Candidate</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Area)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Area.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Election)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Election.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Party)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Party.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Verified)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Verified)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Position)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Position)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="CandidateID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    .delete-confirmation {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 50px;
+    }
+
+    h3 {
+        color: black; /* Pastel gray */
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .btn-danger {
+        background-color: #FAA0A0; /* Bootstrap danger color */
+        border: none; /* No border */
+        font-size: 16px;
+        color: #333333;
+        padding: 6px 12px;
+    }
+
+        .btn-danger:hover {
+            background-color: #FF6961; /* Darker shade on hover for delete button */
+        }
+</style>
+
+<div class="container">
+    <div class="delete-confirmation">
+        <h3 class="text-center">Are you sure you want to delete this?</h3>
+        <div>
+            <h4 class="text-center">Candidate Details</h4>
+            <hr />
+            <dl class="row">
+
+                <dt class="col-sm-2"></dt>
+                <dd class="col-sm-10"><img src="@Model.CandidateImagePath" alt="Candidate" width="350px"></dd>
+
+                <!-- Name -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Name)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+
+                <!-- Area -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Area)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Area.Name)</dd>
+
+                <!-- Election -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Election)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Election.Name)</dd>
+
+                <!-- Party -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Party)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Party.Name)</dd>
+
+                <!-- Verified -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Verified)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Verified)</dd>
+
+                <!-- Position -->
+                <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Position)</dt>
+                <dd class="col-sm-10">@Html.DisplayFor(model => model.Position)</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="CandidateID" />
+                <div class="text-center">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a asp-action="Details" asp-route-id="@Model.CandidateID" class="btn btn-secondary">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

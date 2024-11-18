@@ -164,6 +164,8 @@ footer.footer2 .container {
     align-items: center;
     justify-content: center;
     font-family: 'Poppins', sans-serif !important;
+    background-color: #212529;
+    height: 100px !important;
 }
 
 footer.footer2 p {

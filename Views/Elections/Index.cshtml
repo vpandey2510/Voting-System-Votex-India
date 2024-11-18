@@ -18,31 +18,46 @@
         margin: 0 auto;
     }
 
-    .card-container {
-        margin-top: 20px;
-        /*width: 116% !important;*/
-    }
+    
 
-    .election-card {
+    .card {
         background-color: #ffffff; /* White background for the card */
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        /*padding: 10px;*/
-        transition: transform 0.2s;
-        margin-bottom: 30px;
-        width: auto;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        transition: transform 0.2s; /* Transition effect for hover */
+        margin-bottom: 30px; /* Space below each card */
+        padding: 20px; /* Padding inside the card */
+        position: relative; /* Position context for absolute elements */
+        max-width: 360px;
+        min-width: 360px;
     }
 
-        .election-card:hover {
+        .card:hover {
             transform: scale(1.05); /* Slight zoom effect on hover */
         }
 
-    #electionCards {
-        display: flex;
-        flex-wrap: wrap; /* Allows cards to wrap onto the next line */
-        margin-top: 20px; /* Adds space above the card container */
-        justify-content: space-around;
+    
+    /* Responsive adjustments for cards */
+    .card-container {
+        display: flex; /* Flex display for card container */
+        flex-wrap: wrap; /* Allow cards to wrap onto the next line */
+        margin-top: 20px; /* Space above the card container */
+        /*justify-content: space-between; Space between cards */
+        gap: 20px; /* Gap between cards */
     }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align card content */
+        justify-content: space-between; /* Distribute content evenly */
+    }
+
+    .alert {
+        margin-top: 20px; /* Space above the alert */
+        text-align: center; /* Center alert text */
+    }
+    
 
     h2 {
         color: black; /* Pastel gray */
@@ -53,6 +68,13 @@
 
     h5.card-title {
         padding-bottom: 20px;
+    }
+
+    .card-img-top {
+        width: 100%; /* Ensure the image spans the card width */
+        height: 200px; /* Fixed height for consistency */
+        object-fit: cover; /* Maintain aspect ratio and crop excess */
+        border-radius: 10px; /* Rounded corners for the image */
     }
 
     /* Filter buttons and Create button styling */
@@ -117,7 +139,7 @@
     
 </style>
 
-<div class="container">
+<div class="container mt-5">
     <h2>Elections</h2>
 
     <div class="action-container justify-content-between">
@@ -136,39 +158,41 @@
     </div>
 
 
-    <div class="row card-container" id="electionCards">
+    <div class="card-container" id="electionCards">
         @if (!SignInManager.IsSignedIn(User) || SignInManager.IsSignedIn(User))
         {
             foreach (var election in Model)
             {
-                <div class="card col-md-4 election-card" data-status="@election.Status">
-                    
+                <div class="card election-card" data-status="@election.Status">
+                    <img class="card-img-top" src="@election.ElectionImagePath" alt="Election">
                         <div class="card-body">
                             <h5 class="card-title">@election.Name</h5>
                             <p class="card-text">Status: @election.Status</p>
                             <p class="card-text">Start Date: @election.StartDate.ToShortDateString()</p>
-                            <a href="@Url.Action("Details", "Elections", new { id = election.ElectionID })" class="btn btn-primary">View Details</a>
-                            @if (!SignInManager.IsSignedIn(User))
-                            {
-                                <a id="vote" asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Vote</a>
-                            }
-                            @if (User.IsInRole("Voter"))
+                            <div class="d-flex justify-content-between" style="width: 310px !important">
+                                <a href="@Url.Action("Details", "Elections", new { id = election.ElectionID })" class="btn btn-primary">View Details</a>
+                                @if (!SignInManager.IsSignedIn(User))
                                 {
-                                    <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = election.ElectionID })" class="btn btn-primary">Vote</a>
+                                    <a id="vote" asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Vote</a>
                                 }
-                            
-                            @if(User.IsInRole("Admin"))
+                                @if (User.IsInRole("Voter"))
                                     {
-                                        <form asp-action="ChangeStatus" method="post" id="statusForm_@election.ElectionID" class="dropdown-form">
-                                            <input type="hidden" name="id" value="@election.ElectionID" />
-                                             <select name="status" class="dropdown-select" onchange="this.form.submit()" required>
-                                                <option value="">Change Status</option>
-                                                <option value="Open">Open</option>
-                                                <option value="Closed">Closed</option>
-                                                <option value="Upcoming">Upcoming</option>
-                                            </select>
-                                        </form>
+                                        <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = election.ElectionID })" class="btn btn-primary">Vote</a>
                                     }
+                            
+                                @if(User.IsInRole("Admin"))
+                                        {
+                                            <form asp-action="ChangeStatus" method="post" id="statusForm_@election.ElectionID" class="dropdown-form">
+                                                <input type="hidden" name="id" value="@election.ElectionID" />
+                                                 <select name="status" class="dropdown-select" onchange="this.form.submit()" required>
+                                                    <option value="">Change Status</option>
+                                                    <option value="Open">Open</option>
+                                                    <option value="Closed">Closed</option>
+                                                    <option value="Upcoming">Upcoming</option>
+                                                </select>
+                                            </form>
+                                        }
+                            </div>
                         </div>
                     
                 </div>

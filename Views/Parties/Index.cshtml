@@ -72,22 +72,35 @@
     }
 
     .btn-warning {
-        background-color: #CCCCFF; /* Bootstrap warning color */
-        border: none; /* No border */
+        background-color: #CCCCFF !important; /* Bootstrap warning color */
+        border: none !important; /* No border */
+        margin-right: 20px;
     }
+
+        .btn-warning:hover {
+            background-color: #C3B1E1 !important; /* Darker shade on hover for edit button */
+            border: none !important; /* No border */
+        }
+
+        .btn-warning:active {
+            background-color: #C3B1E1 !important; /* Darker shade on hover for edit button */
+            border: none !important; /* No border */
+            border-color: #000 !important;
+            box-shadow: none !important;
+        }
+
+        .btn-warning:focus {
+            box-shadow: none !important;
+        }
 
     .btn-danger {
         background-color: #FAA0A0; /* Bootstrap danger color */
         border: none; /* No border */
     }
 
-    .btn-warning:hover {
-        background-color: #C3B1E1; /* Darker shade on hover for edit button */
-    }
-
-    .btn-danger:hover {
-        background-color: #FF6961; /* Darker shade on hover for delete button */
-    }
+        .btn-danger:hover {
+            background-color: #FF6961; /* Darker shade on hover for delete button */
+        }
 
     #search {
         width: 250px; /* Fixed width for the search input */

@@ -125,6 +125,10 @@
       "PackagePath": "staticwebassets\\images\\candidates\\candidate_9.png"
     },
     {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\voter_4.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\voter_4.png"
+    },
+    {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_3.png",
       "PackagePath": "staticwebassets\\images\\elections\\election_3.png"
     },

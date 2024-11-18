@@ -1,46 +1,107 @@
-﻿@model VotingSystem.Models.Voter
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model VotingSystem.Models.Voter
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
 
-<h4>Voter</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" value="@User.Identity.Name" readonly />
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AreaID" class="control-label"></label>
-                <select asp-for="AreaID" class="form-control" asp-items="ViewBag.AreaID"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    .voter-form-card {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 50px;
+    }
+
+    h1, h4 {
+        color: black; /* Pastel gray */
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #6c63ff; /* Pastel violet */
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a54e1; /* Darker shade for hover */
+    }
+</style>
+
+<div class="container">
+    <div class="voter-form-card">
+        <h1>Create Voter</h1>
+        <h4>Voter Details</h4>
+        <hr />
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Name -->
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="voterImage" class="control-label">Image</label>
+                    <input type="file" name="voterImage" class="form-control" />
+                </div>
+
+                <!-- Age -->
+                <div class="form-group mb-3">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <!-- Gender -->
+                <div class="form-group mb-3">
+                    <label asp-for="Gender" class="control-label"></label>
+                    <select asp-for="Gender" class="form-control">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+
+                <!-- Username -->
+                <div class="form-group mb-3">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" value="@User.Identity.Name" readonly />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
+                <!-- Area -->
+                <div class="form-group mb-3">
+                    <label asp-for="AreaID" class="control-label"></label>
+                    <select asp-for="AreaID" class="form-control" asp-items="ViewBag.AreaID"></select>
+                    <span asp-validation-for="AreaID" class="text-danger"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group mb-3 text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        }
     </div>
 </div>
 
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

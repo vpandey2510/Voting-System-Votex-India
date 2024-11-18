@@ -4,37 +4,136 @@
     ViewData["Title"] = "Cast Your Vote";
 }
 
-<h2>@ViewData["Title"]</h2>
+<style>
+    body {
+        background-color: #f0f4f8;
+        color: #333;
+        font-family: 'Poppins', sans-serif;
+    }
 
-<div>
-    <h3>Select a Candidate to Vote for</h3>
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        max-width: 360px;
+        flex: 1 1 calc(33.333% - 20px); /* Ensure 3 cards per row */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+    }
+
+    h5.card-title {
+        padding-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #6c63ff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a55d6;
+        }
+
+    .btn-secondary {
+        background-color: #CCCCFF;
+        color: #333;
+        border: none;
+    }
+
+        .btn-secondary:hover {
+            background-color: #C3B1E1;
+        }
+
+    h2 {
+        color: black;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+        padding: 15px;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="text-center text-primary">@ViewData["Title"]</h2>
+
+    <div class="text-center mt-3">
+        <h4 class="text-muted">Select a Candidate to Vote for</h4>
+    </div>
 
     @if (Model == null || !Model.Any())
     {
-        <p>No candidates available for this election in your area.</p>
+        <div class="alert alert-warning text-center mt-4">
+            No candidates available for this election in your area.
+        </div>
     }
     else
     {
-        <form asp-action="CastVote" method="post">
-            <!-- ElectionID is passed via ViewBag -->
-            <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
+        <div class="card-container">
+            @foreach (var candidate in Model)
+            {
+                <div class="card">
+                    <form asp-action="CastVote" method="post">
+                        <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
+                        <input type="hidden" name="candidateId" value="@candidate.CandidateID" />
 
-            <div>
-                <label for="CandidateId">Candidate:</label>
-                <select name="candidateId" id="CandidateId" required>
-                    <option value="">Select a Candidate</option>
-                    @foreach (var candidate in Model)
-                    {
-                        <option value="@candidate.CandidateID">@candidate.Name</option>
-                    }
-                </select>
-            </div>
-
-            <button type="submit">Cast Vote</button>
-        </form>
+                        <img class="card-img-top" src="@candidate.CandidateImagePath" alt="@candidate.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@candidate.Name</h5>
+                            <p class="card-text"><strong>Position:</strong> @candidate.Position</p>
+                            <p class="card-text"><strong>Party:</strong> @candidate.Party.Name</p>
+                            <button type="submit" class="btn btn-primary">Vote for @candidate.Name</button>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
     }
 </div>
 
-<div>
-    <button onclick="window.location.href='@Url.Action("Index", "Home")'">Back to Home</button>
+<div class="text-center mt-5">
+    <button onclick="window.location.href='@Url.Action("Index", "Home")'" class="btn btn-secondary">
+        Back to Home
+    </button>
 </div>

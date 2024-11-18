@@ -31,20 +31,25 @@
     }
 </style>
 
+<h1>Create New Election</h1>
 
     <div class="container">
         <div class="election-form-card">
-            <h1>Create Election</h1>
-            <h4>Election Details</h4>
+            
             <hr />
-            <form asp-action="Create">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <!-- Name -->
                 <div class="form-group mb-3">
-                    <label asp-for="Name" class="control-label"></label>
+                    <label asp-for="Name" class="control-label">Election Name</label>
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="electionImage" class="control-label">Image</label>
+                    <input type="file" name="electionImage" class="form-control" />
                 </div>
 
                 <!-- Start Date -->

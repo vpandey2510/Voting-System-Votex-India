@@ -1,30 +1,99 @@
 ﻿@model VotingSystem.Models.Party
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Party Details";
 }
 
-<h1>Details</h1>
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    .party-details-card {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 50px;
+    }
+    h2 {
+        color: black; /* Pastel gray */
+        margin-bottom: 20px;
+    }
+    img {
+        border-radius: 10px; /* Rounded corners for the image */
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+        background-color: #6c63ff; /* Pastel violet */
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #5a54e1; /* Darker shade for hover */
+    }
+    .btn-secondary {
+        background-color: #adb5bd; /* Bootstrap secondary color */
+        border: none;
+    }
+    .btn-secondary:hover {
+        background-color: #868e96; /* Darker shade for hover */
+    }
 
-<div>
-    <h4>Party</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FlagImagePath)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Model.FlagImagePath" alt="Flag Image">
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.PartyID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    .btn-warning {
+        background-color: #CCCCFF !important; /* Bootstrap warning color */
+        border: none !important; /* No border */
+        margin-right: 20px;
+    }
+
+        .btn-warning:hover {
+            background-color: #C3B1E1 !important; /* Darker shade on hover for edit button */
+            border: none !important; /* No border */
+        }
+
+        .btn-warning:active {
+            background-color: #C3B1E1 !important; /* Darker shade on hover for edit button */
+            border: none !important; /* No border */
+            border-color: #000 !important;
+            box-shadow: none !important;
+        }
+
+        .btn-warning:focus {
+            box-shadow: none !important;
+        }
+
+    .btn-danger {
+        background-color: #FAA0A0; /* Bootstrap danger color */
+        border: none; /* No border */
+    }
+
+        .btn-danger:hover {
+            background-color: #FF6961; /* Darker shade on hover for delete button */
+        }
+</style>
+
+<div class="container">
+    <div class="party-details-card">
+        <h2>@Model.Name</h2>
+        <img src="@Model.FlagImagePath" alt="Party Flag" width="350px">
+        <p><strong>Party Name:</strong> @Model.Name</p>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="d-flex justify-content-start w-100">
+                <a asp-action="Edit" asp-route-id="@Model.PartyID" class="btn btn-warning btn-sm">
+                    <i class="fas fa-edit" style="margin-right: 10px; color: #6c63ff;"></i> Edit
+                </a>
+                <a asp-action="Delete" asp-route-id="@Model.PartyID" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this Party?');">
+                    <i class="fas fa-trash" style="margin-right: 10px; color: #e3342f;"></i> Delete
+                </a>
+            </div>
+        }
+
+        <div class="mt-4">
+            <a href="@Url.Action("Index", "Parties")" class="btn btn-secondary">Back to Parties</a>
+        </div>
+    </div>
 </div>

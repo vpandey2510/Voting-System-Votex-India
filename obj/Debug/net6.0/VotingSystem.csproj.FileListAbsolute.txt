@@ -285,3 +285,4 @@ C:\Users\vaspande\source\repos\VotingSystem\VotingSystem\obj\Debug\net6.0\refint
 C:\Users\vaspande\source\repos\VotingSystem\VotingSystem\obj\Debug\net6.0\VotingSystem.pdb
 C:\Users\vaspande\source\repos\VotingSystem\VotingSystem\obj\Debug\net6.0\VotingSystem.genruntimeconfig.cache
 C:\Users\vaspande\source\repos\VotingSystem\VotingSystem\obj\Debug\net6.0\ref\VotingSystem.dll
+C:\Users\vaspande\source\repos\VotingSystem\VotingSystem\obj\Debug\net6.0\VotingSystem.sourcelink.json

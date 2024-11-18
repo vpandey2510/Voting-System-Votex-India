@@ -1,89 +1,127 @@
 ﻿@model IEnumerable<VotingSystem.Models.Voter>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<style>
+    /* Styling similar to the Candidate Index */
+    body {
+        background-color: #f0f4f8;
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
 
-<h1>Index</h1>
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Username)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Eligible)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.Name)
-            </td>
-                <td>
-                    <input type="checkbox" class="verify-checkbox" data-id="@item.VoterID"
-                    @(item.Eligible ? "checked" : "") />
-                </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.VoterID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VoterID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .card {
+        background-color: #ffffff; /* White background for the card */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        transition: transform 0.2s; /* Transition effect for hover */
+        margin-bottom: 30px; /* Space below each card */
+        padding: 20px; /* Padding inside the card */
+        position: relative; /* Position context for absolute elements */
+        max-width: 360px;
+        min-width: 360px;
+    }
+
+        .card:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+    .card-container {
+        display: flex; /* Flex display for card container */
+        flex-wrap: wrap; /* Allow cards to wrap onto the next line */
+        margin-top: 20px; /* Space above the card container */
+        gap: 20px; /* Gap between cards */
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align card content */
+        justify-content: space-between; /* Distribute content evenly */
+    }
+
+    .btn-primary {
+        background-color: #6c63ff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a55d6;
+        }
+
+    .btn-verify {
+        background-color: #6c63ff;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-verify:hover {
+            background-color: #5a55d6;
+        }
+</style>
+
+<div class="container mt-5">
+    <h2>Voters</h2>
+
+    <div class="card-container" id="voterCards">
+        @foreach (var voter in Model)
+        {
+            <div class="card voter-card">
+                <img class="card-img-top" src="@voter.VoterImagePath" alt="Voter">
+                <div class="card-body">
+                    <h5 class="card-title">@voter.Name</h5>
+                    <p class="card-text">Age: @voter.Age</p>
+                    <p class="card-text">Area: @voter.Area.Name</p>
+
+                    <div class="d-flex justify-content-between" style="width: 310px;">
+                        <a href="@Url.Action("Details", "Voters", new { id = voter.VoterID })" class="btn btn-primary">View Details</a>
+
+                        <button class="btn btn-verify"
+                                data-id="@voter.VoterID"
+                                data-verified="@voter.Eligible">
+                            @(voter.Eligible ? "Un-Verify" : "Verify")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('.verify-checkbox').on('change', function () {
-                var voterId = $(this).data('id');
-                var isVerified = $(this).is(':checked');
-                var token = $('input[name="__RequestVerificationToken"]').val();
+            $('.btn-verify').on('click', function () {
+                const button = $(this);
+                const voterId = button.data('id');
+                const currentStatus = button.data('verified');
+                const newStatus = !currentStatus; // Toggle verification status
+                const token = $('input[name="__RequestVerificationToken"]').val();
 
                 $.ajax({
                     url: '@Url.Action("VerifyEligibility", "Voters")',
                     type: 'POST',
                     data: {
                         id: voterId,
-                        isEligible: isVerified,
+                        isEligible: newStatus,
                         __RequestVerificationToken: token
                     },
                     success: function (response) {
                         if (response.success) {
-                            alert('Verification status updated successfully.');
+                            // Update button text and data-verified attribute
+                            button.text(newStatus ? "Un-Verify" : "Verify");
+                            button.data('verified', newStatus);
                         } else {
                             alert('Error: ' + response.message);
                         }

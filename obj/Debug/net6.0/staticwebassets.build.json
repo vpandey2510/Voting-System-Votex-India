@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5b1jMSx5+zv03cKGlaYeE1F5izxlzNSqsA3Ir8/cY0s=",
+  "Hash": "tXM0B/CZ/sMwzQiJa8b/OrqCrI3uvXzUGUedv+/vZBU=",
   "Source": "VotingSystem",
   "BasePath": "_content/VotingSystem",
   "Mode": "Default",
@@ -1763,6 +1763,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\candidates\\candidate_9.png"
+    },
+    {
+      "Identity": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\voter_4.png",
+      "SourceId": "VotingSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\",
+      "BasePath": "_content/VotingSystem",
+      "RelativePath": "images/candidates/voter_4.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\candidates\\voter_4.png"
     },
     {
       "Identity": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_3.png",

@@ -1,13 +1,69 @@
 ﻿@{
-    ViewData["Title"] = "Vote Cast Successfully";
+    ViewData["Title"] = "Vote Status";
 }
 
-<h2>Your vote has been successfully cast!</h2>
+<style>
+    body {
+        background-color: #f0f4f8; /* Light background */
+        color: #333;
+        font-family: 'Poppins', sans-serif;
+    }
 
-<div>
-    <p>Thank you for voting. You can now view the total votes by area.</p>
+    h2 {
+        text-align: center;
+        color: #28a745; /* Success green */
+        margin-top: 30px;
+        font-weight: 600;
+    }
+
+    h3 {
+        text-align: center;
+        color: #ff4d4f; /* Warning red */
+        margin-top: 30px;
+        font-weight: 600;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        text-align: center;
+        padding: 20px;
+        background-color: #ffffff; /* White background */
+    }
+
+    p {
+        font-size: 18px;
+        color: #555;
+        margin: 20px 0;
+    }
+
+    .btn-primary {
+        background-color: #6c63ff;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #5a55d6;
+        }
+
+</style>
+
+<div class="container">
+    @if (ViewBag.Message == "You have already voted in this election.")
+    {
+        <h3>@ViewBag.Message</h3>
+    }
+    else
+    {
+        <h2>@ViewBag.Message</h2>
+        <p>Thank you for voting. You can now view the live voting count.</p>
+    }
 
     <form asp-action="GetTotalVotes" method="get">
         <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
-        <button type="submit">View Vote Counts</button>
+        <button type="submit" class="btn-primary">View Vote Counts</button>
     </form>
+</div>

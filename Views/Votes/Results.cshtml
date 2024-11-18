@@ -1,144 +1,169 @@
-﻿@*
-    @model IEnumerable<dynamic>
+﻿@model IEnumerable<dynamic>
 
 @{
-    ViewData["Title"] = "Total Votes by Election and Candidate";
+    ViewData["Title"] = "Total Votes";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-@if (!Model.Any())
-{
-    <p>No elections available.</p>
-}
-else
-{
-    foreach (var election in Model)
-    {
-        <h3>Election: @election.ElectionName</h3>
-
-        @if (election.Candidates.Count == 0)
-        {
-            <p>No Candidates</p>
-        }
-        else
-        {
-            <table>
-                <thead>
-                    <tr>
-                        <th>Candidate Name</th>
-                        <th>Total Votes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var candidate in election.Candidates)
-                    {
-                        <tr>
-                            <td>@candidate.CandidateName</td>
-                            <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+<style>
+    body {
+        background-color: #f0f4f8;
+        font-family: 'Poppins', sans-serif;
+        color: #333;
     }
-}
-*@
 
-@*
-@model IEnumerable<dynamic>
-
-@{
-    ViewData["Title"] = "Election Result";
-}
-
-<h2>@ViewData["Title"]</h2>
-
-@if (!Model.Any())
-{
-    <p>No elections available.</p>
-}
-else
-{
-    foreach (var election in Model)
-    {
-        <h3>Election: @election.ElectionName (@election.Status)</h3>
-
-        @if (election.Candidates.Count == 0)
-        {
-            <p>No Candidates</p>
-        }
-        else
-        {
-            <table>
-                <thead>
-                    <tr>
-                        <th>Candidate Name</th>
-                        <th>Total Votes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var candidate in election.Candidates)
-                    {
-                        <tr>
-                            <td>@candidate.CandidateName</td>
-                            <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+    h2 {
+        text-align: center;
+        color: black; /* Pastel gray */
+        margin-top: 20px;
+        margin-bottom: 40px;
     }
-}
 
-*@
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+    }
 
-@model IEnumerable<dynamic>
+    .filter-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-@{
-    ViewData["Title"] = "Election Result";
-}
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
 
-<h2>@ViewData["Title"]</h2>
+    th, td {
+        text-align: left;
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+    }
 
-@if (!Model.Any())
-{
-    <p>No elections available.</p>
-}
-else
-{
-    foreach (var election in Model)
-    {
-        <h3>@election.ElectionName (@election.Status)</h3>
+    th {
+        background-color: #6c63ff;
+        
+        color: #fff;
+        font-weight: 600;
+    }
 
-        if (election.CandidatesByArea.Count == 0)
-        {
-            <p>No Candidates</p>
-        }
-        else
-        {
-            foreach (var areaGroup in election.CandidatesByArea)
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr.winner {
+        background-color: #6FC276;
+        color: #fff;
+    }
+
+    button {
+        padding: 8px 12px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <h2>Live Election Result</h2>
+
+    <!-- Filters Section -->
+    <div class="filters">
+        <div class="filter-group">
+            <label for="electionFilter">Filter by Election:</label>
+            <select id="electionFilter" onchange="applyFilters()" class="form-control">
+                <option value="">All Elections</option>
+                @foreach (var election in ViewBag.Elections)
+                {
+                    if (ViewBag.SelectedElection == election.ElectionID)
+                    {
+                        <option value="@election.ElectionID" selected>@election.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@election.ElectionID">@election.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="areaFilter">Filter by Area:</label>
+            <select id="areaFilter" onchange="applyFilters()" class="form-control">
+                <option value="">All Areas</option>
+                @foreach (var area in ViewBag.Areas)
+                {
+                    if (ViewBag.SelectedArea == area.AreaID)
+                    {
+                        <option value="@area.AreaID" selected>@area.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@area.AreaID">@area.Name</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <!-- Candidates Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Candidate Name</th>
+                <th>Party</th>
+                <th>Election</th>
+                <th>Area</th>
+                <th>Total Votes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
             {
-                <h4>@areaGroup.AreaName</h4>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Candidate Name</th>
-                            <th>Total Votes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var candidate in areaGroup.Candidates)
-                        {
-                            <tr>
-                                <td>@candidate.CandidateName</td>
-                                <td>@(candidate.TotalVotes > 0 ? candidate.TotalVotes : "0")</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <tr>
+                    <td colspan="4" style="text-align:center;">No candidates available for the selected filters.</td>
+                </tr>
             }
+            else
+            {
+                @foreach (var candidate in Model)
+                {
+                    var maxVotes = Model.Max(c => c.TotalVotes);
+                    var isWinner = candidate.TotalVotes == maxVotes && candidate.TotalVotes > 0;
+
+                    <tr class="@(isWinner ? "winner" : "")">
+                        <td>@candidate.CandidateName</td>
+                        <td>@candidate.PartyName</td>
+                        <td>@candidate.ElectionName</td>
+                        <td>@candidate.AreaName</td>
+                        <td>@candidate.TotalVotes</td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function applyFilters() {
+            const electionId = document.getElementById("electionFilter").value;
+            const areaId = document.getElementById("areaFilter").value;
+            window.location.href = `/Votes/GetTotalVotes?electionId=${electionId}&areaId=${areaId}`;
         }
-    }
+    </script>
 }

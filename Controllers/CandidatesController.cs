@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using VotingSystem.Models;
+using static System.Collections.Specialized.BitVector32;
 
 
 namespace VotingSystem.Controllers
@@ -56,6 +57,8 @@ namespace VotingSystem.Controllers
             ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name");
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name");
 
+            var candidate = new Candidate();
+
             return View();
         }
 
@@ -64,20 +67,57 @@ namespace VotingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CandidateID,Name,Username,AreaID,ElectionID,PartyID,Position")] Candidate candidate)
+        public async Task<IActionResult> Create([Bind("CandidateID,Name,CandidateImagePath,Username,AreaID,ElectionID,PartyID,Position")] Candidate candidate, IFormFile? candidateImage)
         {
-           if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _context.Add(candidate);
-                await _context.SaveChangesAsync();
+                try
+                {
+                    // Handle flag image upload
+                    if (candidateImage != null && candidateImage.Length > 0)
+                    {
 
-                return RedirectToAction("Details", new { id = candidate.CandidateID });
+                        Console.WriteLine("Entering if loop for image verification");
+                        var uploadsFolder = Path.Combine("wwwroot/images/candidates");
+                        var fileName = Path.GetFileName(candidateImage.FileName);
+
+                        // Ensure the folder exists
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        var filePath = Path.Combine(uploadsFolder, fileName);
+
+                        // Save the file to the server
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await candidateImage.CopyToAsync(stream);
+                        }
+
+                        // Set the FlagImagePath
+                        candidate.CandidateImagePath = $"/images/candidates/{fileName}";
+                        Console.WriteLine($"Candidate Image Path: {candidate.CandidateImagePath}");
+                    }
+
+                    _context.Add(candidate);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", new { id = candidate.CandidateID });
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the error (you can use a logging framework here)
+                    Console.WriteLine($"Error while creating Candidate: {ex.Message}");
+
+                    // Optionally, add a model state error to display on the view
+                    ModelState.AddModelError("", "An error occurred while creating the canndidate.");
+                }
             }
 
             ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
             ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
-
             return View(candidate);
         }
 
@@ -108,39 +148,91 @@ namespace VotingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateID,Name,Username,AreaID,ElectionID,PartyID,Position")] Candidate candidate)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateID,Name,Username,AreaID,ElectionID,PartyID,Position,Verified")] Candidate candidate, IFormFile? candidateImage)
         {
             if (id != candidate.CandidateID)
+            {
+                return BadRequest("Mismatched Candidate ID.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // Reload dropdowns in case of an error
+                ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
+                ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
+                ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
+                return View(candidate);
+            }
+
+            var existingCandidate = await _context.Candidates.FindAsync(id);
+            if (existingCandidate == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                // Update properties
+                existingCandidate.Name = candidate.Name;
+                existingCandidate.AreaID = candidate.AreaID;
+                existingCandidate.ElectionID = candidate.ElectionID;
+                existingCandidate.PartyID = candidate.PartyID;
+                existingCandidate.Position = candidate.Position;
+
+                existingCandidate.Verified = false;
+
+                // Handle candidate image upload
+                if (candidateImage != null && candidateImage.Length > 0)
                 {
-                    _context.Update(candidate);
-                    await _context.SaveChangesAsync();
+                    var uploadsFolder = Path.Combine("wwwroot/images/candidates");
+                    var fileName = Path.GetFileName(candidateImage.FileName);
+
+                    // Ensure the folder exists
+                    if (!Directory.Exists(uploadsFolder))
+                    {
+                        Directory.CreateDirectory(uploadsFolder);
+                    }
+
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    // Save the file
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await candidateImage.CopyToAsync(stream);
+                    }
+
+                    // Update the image path
+                    existingCandidate.CandidateImagePath = $"/images/candidates/{fileName}";
                 }
-                catch (DbUpdateConcurrencyException)
+
+                else
                 {
-                    if (!CandidateExists(candidate.CandidateID))
+                    // If no new image is uploaded, retain the old image path if it exists
+                    if (existingCandidate.CandidateImagePath == null)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        existingCandidate.CandidateImagePath = string.Empty;
                     }
                 }
+
+                // Save changes
+                _context.Update(existingCandidate);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction("Details", new { id = candidate.CandidateID });
             }
-            ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
-            ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
-            ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
-
-            return View(candidate);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CandidateExists(candidate.CandidateID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
+
 
         [Authorize(Roles = "Admin, Candidate")]
         // GET: Candidates/Delete/5
