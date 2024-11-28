@@ -4,8 +4,8 @@ html {
     font-size: 14px;
 }
 
-@media (min-width: 768px) {
-    html {
+@media{
+    html{
         font-size: 16px;
     }
 }
@@ -43,7 +43,7 @@ body {
 /* Navbar Brand */
 .navbar-brand {
     font-family: 'Poppins', sans-serif !important;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 2rem !important;
     color: #6c757d; /* Dark grey for contrast */
     transition: color 0.3s ease;
@@ -73,7 +73,7 @@ body {
 
 /* Navbar Toggler Icon */
 .navbar .navbar-toggler-icon {
-    background-color: #6c757d; /* Muted color for the toggle icon */
+    background-color: #f3f4f6; 
 }
 
 /* Navbar Collapse */
@@ -144,7 +144,6 @@ footer.footer2 {
     padding: 20px 0;
     position: relative;
     bottom: 0;
-    width: 100%;
 }
 
 /* Ensure footer sticks to the bottom */
@@ -154,6 +153,7 @@ html, body {
 
 .container.flex-grow-1 {
     flex: 1; /* Make the main content take up remaining vertical space */
+    /*margin: 20px 10px auto 10px;*/
 }
 
 /* Footer Content Styling */

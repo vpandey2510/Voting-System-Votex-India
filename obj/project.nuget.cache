@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bx8+iRw5GVY=",
+  "dgSpecHash": "dQFlYKX+C7k=",
   "success": true,
   "projectFilePath": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\VotingSystem.csproj",
   "expectedPackageFiles": [
@@ -111,6 +111,7 @@
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512",
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.visualstudio.debugger.contracts\\17.2.0\\microsoft.visualstudio.debugger.contracts.17.2.0.nupkg.sha512",
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration\\6.0.18\\microsoft.visualstudio.web.codegeneration.6.0.18.nupkg.sha512",
     "C:\\Users\\vaspande\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.core\\6.0.18\\microsoft.visualstudio.web.codegeneration.core.6.0.18.nupkg.sha512",

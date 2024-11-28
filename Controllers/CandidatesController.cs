@@ -53,13 +53,17 @@ namespace VotingSystem.Controllers
         // GET: Candidates/Create
         public IActionResult Create()
         {
-            ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name");
-            ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name");
-            ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name");
+            var openElections = _context.Elections
+                .Where(e => e.Status == "Open") // Filter elections with Status == "Open"
+                .ToList();
+
+            ViewData["ElectionID"] = new SelectList(openElections, "ElectionID", "Name");
+            ViewData["PartyID"] = new SelectList(_context.Parties.ToList(), "PartyID", "Name");
+            ViewData["AreaID"] = new SelectList(_context.Areas.ToList(), "AreaID", "Name");
 
             var candidate = new Candidate();
 
-            return View();
+            return View(candidate);
         }
 
         // POST: Candidates/Create
@@ -115,7 +119,11 @@ namespace VotingSystem.Controllers
                 }
             }
 
-            ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
+            var openElections = _context.Elections
+                .Where(e => e.Status == "Open") // Filter elections with Status == "Open"
+                .ToList();
+
+            ViewData["ElectionID"] = new SelectList(openElections, "ElectionID", "Name", candidate.ElectionID);
             ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
             return View(candidate);
@@ -136,7 +144,12 @@ namespace VotingSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
+
+            var openElections = _context.Elections
+                .Where(e => e.Status == "Open") // Filter elections with Status == "Open"
+                .ToList();
+
+            ViewData["ElectionID"] = new SelectList(openElections, "ElectionID", "Name", candidate.ElectionID);
             ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
             ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
 
@@ -157,8 +170,11 @@ namespace VotingSystem.Controllers
 
             if (!ModelState.IsValid)
             {
-                // Reload dropdowns in case of an error
-                ViewData["ElectionID"] = new SelectList(_context.Elections, "ElectionID", "Name", candidate.ElectionID);
+                var openElections = _context.Elections
+                 .Where(e => e.Status == "Open") // Filter elections with Status == "Open"
+                 .ToList();
+
+                ViewData["ElectionID"] = new SelectList(openElections, "ElectionID", "Name", candidate.ElectionID);
                 ViewData["PartyID"] = new SelectList(_context.Parties, "PartyID", "Name", candidate.PartyID);
                 ViewData["AreaID"] = new SelectList(_context.Areas, "AreaID", "Name", candidate.AreaID);
                 return View(candidate);

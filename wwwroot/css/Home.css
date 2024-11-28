@@ -1,11 +1,49 @@
-﻿.carousel slide{
+﻿body {
+    background-color: #f0f4f8; /* Light background */
+    color: #333;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+
+.container {
+    /*margin: 20px 10px auto 10px;*/
+    text-align: center;
+    background-color: #ffffff; /* White background */
+    font-family: 'Poppins', sans-serif !important;
+    max-width: 1200px !important;
+    margin-top: 10px;
+}
+
+.container-home {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.upcoming h2{
+    padding-top: 20px;
+}
+
+.carousel slide{
     width: 100%;
 }
 
 .carousel-item img {
     object-fit: cover; /* Ensures the image covers the entire area */
     object-position: inherit;
-    height: 500px; /* Set a fixed height for the carousel items */
+    height: 600px; /* Set a fixed height for the carousel items */
     opacity: 0.9;
 }
 
@@ -13,4 +51,105 @@
     background-color: rgba(0, 0, 0, 0.5); /* Background for better text readability */
     padding: 10px;
     border-radius: 5px;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.scrollable-card-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 20px 0; /* Spacing for the entire section */
+    justify-content: center;
+}
+
+.scrollable-card-container {
+    display: flex;
+    gap: 30px; /* Space between cards */
+    overflow: hidden; /* Hide overflowing items */
+    position: relative;
+    margin: 10px 20px 0 20px;
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+    width: calc(100% - 100px); /* Account for the arrow buttons */
+    padding-left: 50px;
+}
+
+.scroll-arrow {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #f9f9f9; /* Button background */
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+    .scroll-arrow:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Darker shade on hover */
+    }
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+.home-card {
+    flex: 0 0 auto; /* Prevent shrinking */
+    width: 300px; /* Card width */
+    height: 450px;
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+    .home-card:hover {
+        transform: scale(1.05);
+    }
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.home-card .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+h3.card-title {
+    padding-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.home-card .card-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
 }

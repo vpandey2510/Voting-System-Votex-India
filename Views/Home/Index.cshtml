@@ -1,44 +1,104 @@
-﻿
+﻿@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext _context
+
 @{
     ViewData["Title"] = "Home Page";
 }
 
 
-<div id="voteXCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="https://followmyvote.com/wp-content/uploads/2015/01/Online-Voting-Button-Follow-My-Vote-scaled.jpg" class="d-block w-100" alt="Vote Smart">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Vote Smart</h5>
-                <p>Make informed decisions in every election.</p>
+<div class="container-home">
+<div class="container">
+    <section class="carouselSection">
+        <div id="voteXCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#voteXCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://i0.wp.com/calmatters.org/wp-content/uploads/2022/05/election-security.jpg?fit=2202%2C1361&ssl=1" class="d-block w-100" alt="Secure Voting">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Secure Voting</h5>
-                <p>Your votes are safe and confidential with VoteX.</p>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://s3.amazonaws.com/snwceomedia/dpn/3d4362fd-de19-4e00-9495-6f75674ee861.sized-1000x1000.gif?w=1000" class="d-block w-100" alt="Vote Smart">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Vote Smart</h5>
+                        <p>Make informed decisions in every election.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://wp.technologyreview.com/wp-content/uploads/2018/08/blockchainillo_0-11.gif" class="d-block w-100" alt="Secure Voting">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Secure Voting</h5>
+                        <p>Your votes are safe and confidential with VoteX.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://lavkush.co.in/wp-content/uploads/2024/03/IMG_0205.gif" class="d-block w-100" alt="Join the Democracy">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Join the Democracy</h5>
+                        <p>Be a part of the change, vote today!</p>
+                    </div>
+                </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#voteXCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#voteXCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <div class="carousel-item">
-            <img src="https://media.istockphoto.com/id/1007970946/vector/voting.jpg?s=612x612&w=0&k=20&c=121W_qy9HFaDjQv6WsIuBFajf4rQULTLkif0U1tV4cs=" class="d-block w-100" alt="Join the Democracy">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Join the Democracy</h5>
-                <p>Be a part of the change, vote today!</p>
+    </section>
+        <section class="upcoming">
+            <h2 class="text-center justify-content-center">Upcoming Elections</h2>
+            <div class="scrollable-card-wrapper">
+                <button class="scroll-arrow left-arrow" aria-label="Scroll Left">&lt;</button>
+                <div class="scrollable-card-container">
+                    @foreach (var election in _context.Elections)
+                    {
+                        if (election.StartDate > DateOnly.FromDateTime(DateTime.Now))
+                        {
+                            <div class="home-card">
+                                <img class="card-img-top" src="@election.ElectionImagePath" alt="@election.Name" />
+                                <div class="card-body">
+                                    <h3 class="card-title">@election.Name</h3>
+                                    <p class="card-text">@election.Description</p>
+                                    <p class="card-text">@election.StartDate</p>
+                                    <p class="card-text">@election.Status</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="scroll-arrow right-arrow" aria-label="Scroll Right">&gt;</button>
             </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#voteXCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#voteXCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+        </section>
 </div>
+
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.querySelector('.scrollable-card-container');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+        const scrollStep = 300; // Adjust scrolling step size
+
+        // Scroll left
+        leftArrow.addEventListener('click', () => {
+            container.scrollBy({
+                left: -scrollStep,
+                behavior: 'smooth',
+                });
+        });
+
+            // Scroll right
+        rightArrow.addEventListener('click', () => {
+            container.scrollBy({
+                left: scrollStep,
+                behavior: 'smooth',
+                });
+            });
+        });
+</script>
+

@@ -15,11 +15,60 @@ namespace VotingSystem.Controllers
             _context = context;
         }
 
+        // Helper method to close elections with passed end dates
+
+        private async Task AutoOpenElectionsAsync()
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            // Find elections where the start date has passed and the status is not "Open"
+            var electionsToOpen = await _context.Elections
+                .Where(e => e.StartDate <= today && e.Status != "Open")
+                .ToListAsync();
+
+            foreach (var election in electionsToOpen)
+            {
+                election.Status = "Open";
+            }
+
+            // Save changes if there are updates
+            if (electionsToOpen.Count > 0)
+            {
+                _context.UpdateRange(electionsToOpen);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task AutoCloseElectionsAsync()
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            // Find elections where the end date has passed and the status is not "Closed"
+            var electionsToClose = await _context.Elections
+                .Where(e => e.EndDate < today && e.Status != "Closed")
+                .ToListAsync();
+
+            foreach (var election in electionsToClose)
+            {
+                election.Status = "Closed";
+            }
+
+            // Save changes if there are updates
+            if (electionsToClose.Count > 0)
+            {
+                _context.UpdateRange(electionsToClose);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         // GET: Election
         // Admin view to manage elections (create, edit, and delete)
-        
+
         public async Task<IActionResult> Index()
         {
+            await AutoOpenElectionsAsync();
+            await AutoCloseElectionsAsync();
+
             return View(await _context.Elections.ToListAsync());
         }
 
@@ -60,6 +109,14 @@ namespace VotingSystem.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("Name,ElectionImagePath,StartDate,EndDate,Status,Description")] Election election, IFormFile? electionImage)
         {
+            // Validate dates
+            if (election.EndDate < election.StartDate)
+            {
+                // Add a model state error for end date before start date
+                ModelState.AddModelError("EndDate", "End date cannot be earlier than the start date.");
+                return View(election); // Return the view with the error message
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -135,6 +192,13 @@ namespace VotingSystem.Controllers
             if (id != election.ElectionID)
             {
                 return BadRequest("Mismatched Election ID.");
+            }
+
+            // Validate dates
+            if (election.EndDate < election.StartDate)
+            {
+                ModelState.AddModelError("EndDate", "End date cannot be earlier than the start date.");
+                return View(election); // Return the view with the error message
             }
 
             if (!ModelState.IsValid)

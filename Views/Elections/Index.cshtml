@@ -14,7 +14,7 @@
     /* Container and header styling */
     .container {
         width: 100%;
-        max-width: 1200px;
+        max-width: 1200px !important;
         margin: 0 auto;
     }
 
@@ -60,7 +60,7 @@
     
 
     h2 {
-        color: black; /* Pastel gray */
+        color: #0D6EFD; /* Pastel gray */
         text-align: center;
         margin-top: 20px;
         margin-bottom: 40px;
@@ -169,16 +169,20 @@
                             <h5 class="card-title">@election.Name</h5>
                             <p class="card-text">Status: @election.Status</p>
                             <p class="card-text">Start Date: @election.StartDate.ToShortDateString()</p>
-                            <div class="d-flex justify-content-between" style="width: 310px !important">
+                            <div class="d-flex justify-content-around" style="width: 310px !important">
                                 <a href="@Url.Action("Details", "Elections", new { id = election.ElectionID })" class="btn btn-primary">View Details</a>
                                 @if (!SignInManager.IsSignedIn(User))
                                 {
                                     <a id="vote" asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">Vote</a>
                                 }
                                 @if (User.IsInRole("Voter"))
-                                    {
-                                        <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = election.ElectionID })" class="btn btn-primary">Vote</a>
-                                    }
+                                {
+                                     @if (election.Status == "Open")
+                                     {
+                                         <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = election.ElectionID })" class="btn btn-primary">Vote</a>
+                                     }
+
+                                }
                             
                                 @if(User.IsInRole("Admin"))
                                         {

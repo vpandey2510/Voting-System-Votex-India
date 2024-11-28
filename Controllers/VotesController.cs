@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using VotingSystem.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace VotingSystem.Controllers
 {
@@ -14,6 +15,7 @@ namespace VotingSystem.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<VotesController> _logger;
+
 
         public VotesController(ApplicationDbContext context, ILogger<VotesController> logger)
         {
@@ -125,8 +127,18 @@ namespace VotingSystem.Controllers
 
         
 
-        public async Task<IActionResult> GetTotalVotes(int? electionId = 1, int? areaId = 1)
+        public async Task<IActionResult> GetTotalVotes(int? electionId = 1, int? areaId = null)
         {
+
+            // Retrieve the logged-in voter's AreaID (assuming you have a way to get the logged-in user)
+            var loggedInVoterUsername = User.Identity.Name; // Assuming username is used for authentication
+            var loggedInVoter = await _context.Voters
+                .FirstOrDefaultAsync(v => v.Username == loggedInVoterUsername);
+
+            if (loggedInVoter != null && !areaId.HasValue)
+            {
+                areaId = loggedInVoter.AreaID; // Set the default areaId to the voter's AreaID
+            }
 
             var elections = await _context.Elections.ToListAsync();
             var areas = await _context.Areas.ToListAsync(); // Assuming areas are stored in Areas table
@@ -157,15 +169,94 @@ namespace VotingSystem.Controllers
 
             var candidates = await candidatesQuery
                 .OrderByDescending(c => c.TotalVotes) // Sort by descending votes
-                .ToListAsync();
+            .ToListAsync();
+
+            var electionsStatus = await _context.Elections.ToListAsync();
+            var selectedElection = elections.FirstOrDefault(e => e.ElectionID == electionId);
 
             ViewData["Elections"] = elections;
             ViewData["Areas"] = areas;
             ViewData["SelectedElection"] = electionId;
+            ViewData["SelectedElectionStatus"] = selectedElection?.Status;
             ViewData["SelectedArea"] = areaId;
 
             return View("Results", candidates);
         }
+
+        public async Task<IActionResult> ElectionResult(int? electionId = 1, int? areaId = null)
+        {
+            // Query to get election results grouped by area and party
+            var electionResultsQuery = _context.Votes
+                .Join(
+                    _context.Candidates,
+                    vote => vote.CandidateID,
+                    candidate => candidate.CandidateID,
+                    (vote, candidate) => new { vote, candidate }
+                )
+                .Join(
+                    _context.Parties,
+                    vc => vc.candidate.PartyID,
+                    party => party.PartyID,
+                    (vc, party) => new { vc.vote, vc.candidate, party }
+                )
+                .Join(
+                    _context.Areas,
+                    vcp => vcp.candidate.AreaID,
+                    area => area.AreaID,
+                    (vcp, area) => new
+                    {
+                        AreaName = area.Name, // Area name
+                        PartyName = vcp.party.Name, // Party name
+                        CandidateName = vcp.candidate.Name, // Candidate name
+                        VoteCount = vcp.vote.CandidateID, // This will be counted later
+                        ElectionID = vcp.vote.ElectionID,// Add ElectionID here to filter by election
+                        AreaID = vcp.candidate.AreaID,
+                        PartyImage = vcp.party.FlagImagePath
+                    }
+                );
+
+            // Apply filters if electionId or areaId is provided
+            if (electionId.HasValue)
+            {
+                electionResultsQuery = electionResultsQuery.Where(v => v.ElectionID == electionId);
+            }
+
+            if (areaId.HasValue)
+            {
+                electionResultsQuery = electionResultsQuery.Where(v => v.AreaID == areaId);
+            }
+
+            // Group by AreaName and PartyName, then count votes (no 'vote' object anymore after grouping)
+            var electionResults = await electionResultsQuery
+                .GroupBy(r => new { r.AreaName, r.PartyName, r.PartyImage })
+                .Select(g => new
+                {
+                    g.Key.AreaName,
+                    g.Key.PartyName,
+                    g.Key.PartyImage,
+                    VoteCount = g.Count() // Count votes by group
+                })
+                .OrderBy(r => r.AreaName)
+                .ThenByDescending(r => r.VoteCount)
+                .ToListAsync();
+
+            // Retrieve all areas and elections for dropdowns or filters
+            var areas = await _context.Areas.ToListAsync();
+            var elections = await _context.Elections.ToListAsync();
+            var selectedElection = elections.FirstOrDefault(e => e.ElectionID == electionId);
+
+            // Pass data to the view
+            ViewData["Elections"] = elections;
+            ViewData["Areas"] = areas;
+            ViewData["SelectedElection"] = electionId;
+            ViewData["SelectedElectionStatus"] = selectedElection?.Status;
+            ViewData["SelectedArea"] = areaId;
+
+            // Return the grouped results to a view named "ElectionResults"
+            return View("ElectionResult", electionResults);
+        }
+
+
 
 
     }

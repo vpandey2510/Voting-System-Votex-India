@@ -91,9 +91,16 @@
                             <a class="nav-link" asp-area="" asp-controller="Elections" asp-action="Index"><i class="bi bi-ticket-detailed-fill"></i> Elections</a>
                         </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Votes" asp-action="GetTotalVotes" ><i class="bi bi-bar-chart"></i> Results</a>
-                    </li>
+                        @if (User.IsInRole("Voter") || User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Votes" asp-action="GetTotalVotes"><i class="bi bi-person-check"></i> Vote Counts</a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Votes" asp-action="ElectionResult"><i class="bi bi-bar-chart"></i> Results</a>
+                        </li>
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
@@ -101,7 +108,7 @@
     </nav>
 </header>
     <div class="container flex-grow-1">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="padding-bottom: 0px !important;">
             @RenderBody()
         </main>
     </div>
