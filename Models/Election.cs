@@ -16,10 +16,10 @@ namespace VotingSystem.Models
         public string? ElectionImagePath { get; set; }
 
         [Required]
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Required]
-        public DateOnly EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Required]
         [StringLength(10)]

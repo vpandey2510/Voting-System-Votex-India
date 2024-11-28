@@ -55,14 +55,14 @@
                 <div class="scrollable-card-container">
                     @foreach (var election in _context.Elections)
                     {
-                        if (election.StartDate > DateOnly.FromDateTime(DateTime.Now))
+                        if (election.StartDate > DateTime.Now)
                         {
                             <div class="home-card">
                                 <img class="card-img-top" src="@election.ElectionImagePath" alt="@election.Name" />
                                 <div class="card-body">
                                     <h3 class="card-title">@election.Name</h3>
                                     <p class="card-text">@election.Description</p>
-                                    <p class="card-text">@election.StartDate</p>
+                                    <p class="card-text">DateOnly.FromDateTime(@election.StartDate)</p>
                                     <p class="card-text">@election.Status</p>
                                 </div>
                             </div>

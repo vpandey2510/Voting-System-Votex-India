@@ -19,7 +19,7 @@ namespace VotingSystem.Controllers
 
         private async Task AutoOpenElectionsAsync()
         {
-            var today = DateOnly.FromDateTime(DateTime.Now);
+            var today = DateTime.Now;
 
             // Find elections where the start date has passed and the status is not "Open"
             var electionsToOpen = await _context.Elections
@@ -41,7 +41,7 @@ namespace VotingSystem.Controllers
 
         private async Task AutoCloseElectionsAsync()
         {
-            var today = DateOnly.FromDateTime(DateTime.Now);
+            var today = DateTime.Now;
 
             // Find elections where the end date has passed and the status is not "Closed"
             var electionsToClose = await _context.Elections
