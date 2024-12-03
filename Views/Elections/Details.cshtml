@@ -6,10 +6,15 @@
         color: #333;
         font-family: 'Poppins', sans-serif !important;
     }
+    /* Container and header styling */
+    .container {
+        width: 100%;
+        max-width: 1200px !important;
+        margin: 0 auto;
+    }
+
     .election-details-card {
         background-color: #ffffff; /* White background for the card */
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         padding: 30px;
         margin-top: 50px;
     }
@@ -68,7 +73,7 @@
 
             @if (User.IsInRole("Admin"))
             {
-            <div class="d-flex justify-content-start w-100">
+            <div class="d-flex justify-content-center w-100">
                 <a asp-action="Edit" asp-route-id="@Model.ElectionID" class="btn btn-warning btn-sm">
                     <i class="fas fa-edit" style="margin-right: 10px; color: #6c63ff;"></i>Edit
                 </a>

@@ -1,6 +1,7 @@
 ﻿@using Microsoft.EntityFrameworkCore
 @inject ApplicationDbContext _context
 
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -49,7 +50,7 @@
         </div>
     </section>
         <section class="upcoming">
-            <h2 class="text-center justify-content-center">Upcoming Elections</h2>
+            <h1 class="text-center justify-content-center"><strong>Upcoming Elections</strong></h1>
             <div class="scrollable-card-wrapper">
                 <button class="scroll-arrow left-arrow" aria-label="Scroll Left">&lt;</button>
                 <div class="scrollable-card-container">
@@ -58,13 +59,14 @@
                         if (election.StartDate > DateTime.Now)
                         {
                             <div class="home-card">
+                                <a href="@Url.Action("Details", "Elections", new { id = election.ElectionID })" style="text-decoration: none;">
                                 <img class="card-img-top" src="@election.ElectionImagePath" alt="@election.Name" />
                                 <div class="card-body">
                                     <h3 class="card-title">@election.Name</h3>
-                                    <p class="card-text">@election.Description</p>
-                                    <p class="card-text">DateOnly.FromDateTime(@election.StartDate)</p>
+                                    <p class="card-text">@DateOnly.FromDateTime(election.StartDate)</p>
                                     <p class="card-text">@election.Status</p>
                                 </div>
+                                </a>
                             </div>
                         }
                     }
@@ -72,6 +74,25 @@
                 <button class="scroll-arrow right-arrow" aria-label="Scroll Right">&gt;</button>
             </div>
         </section>
+
+        <section>
+            <div class="feedback-section">
+                <h2>Please provide your feedback</h2>
+                <p>Your feedback is valuable to us. Help us become better!!</p>
+                @await Html.PartialAsync("~/Views/Shared/_FeedbackForm.cshtml", new VotingSystem.Models.Feedback())
+                @if (TempData["FeedbackMessage"] != null)
+                {
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            alert("@TempData["FeedbackMessage"]");
+                        });
+                    </script>
+                }
+
+            </div>
+        </section>
+
+        
 </div>
 
 </div>

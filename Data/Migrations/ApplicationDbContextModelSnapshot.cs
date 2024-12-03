@@ -332,6 +332,34 @@ namespace VotingSystem.Migrations
                     b.ToTable("Elections");
                 });
 
+            modelBuilder.Entity("VotingSystem.Models.Feedback", b =>
+                {
+                    b.Property<int>("FeedbackID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackID"), 1L, 1);
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("FeedbackID");
+
+                    b.ToTable("Feedbacks");
+                });
+
             modelBuilder.Entity("VotingSystem.Models.Party", b =>
                 {
                     b.Property<int>("PartyID")

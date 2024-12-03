@@ -1,0 +1,489 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\obj\\Release\\net6.0\\scopedcss\\projectbundle\\VotingSystem.bundle.scp.css",
+      "PackagePath": "staticwebassets\\VotingSystem.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\css\\Home.css",
+      "PackagePath": "staticwebassets\\css\\Home.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Andhra_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Andhra_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Bihar_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Bihar_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Chhattisgarh_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Chhattisgarh_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\GJ_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\GJ_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\HP_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\HP_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Jharkhand_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Jharkhand_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Karnataka_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Karnataka_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\MP_Cpnstituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\MP_Cpnstituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Meghalaya_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Meghalaya_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Nagaland_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Nagaland_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Orissa_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Orissa_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Punjab_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Punjab_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\RJ_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\RJ_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\TN_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\TN_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Telangana_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Telangana_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Tripura_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\Tripura_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\UP_Constituency.png",
+      "PackagePath": "staticwebassets\\images\\areas\\UP_Constituency.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_1.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_1.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_10.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_10.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_2.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_2.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_3.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_3.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_4.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_4.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_5.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_5.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_6.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_6.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_7.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_7.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_8.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_8.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\candidate_9.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\candidate_9.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\voter_4.png",
+      "PackagePath": "staticwebassets\\images\\candidates\\voter_4.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_10.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_10.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_3.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_3.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_4.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_4.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_5.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_5.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_6.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_6.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_7.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_7.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_8.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_8.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_9.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_9.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\lok_sabha.png",
+      "PackagePath": "staticwebassets\\images\\elections\\lok_sabha.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\rajya_sabha.png",
+      "PackagePath": "staticwebassets\\images\\elections\\rajya_sabha.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\AAP_Flag.png",
+      "PackagePath": "staticwebassets\\images\\flags\\AAP_Flag.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\CPI-banner.png",
+      "PackagePath": "staticwebassets\\images\\flags\\CPI-banner.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\Elephant_Bahujan_Samaj_Party.png",
+      "PackagePath": "staticwebassets\\images\\flags\\Elephant_Bahujan_Samaj_Party.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\Flags.png",
+      "PackagePath": "staticwebassets\\images\\flags\\Flags.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\Indian_National_Congress_Flag.png",
+      "PackagePath": "staticwebassets\\images\\flags\\Indian_National_Congress_Flag.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\NPP.png",
+      "PackagePath": "staticwebassets\\images\\flags\\NPP.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\Test_flag.png",
+      "PackagePath": "staticwebassets\\images\\flags\\Test_flag.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_1.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_1.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_10.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_10.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_2.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_2.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_3.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_3.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_4.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_4.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_5.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_5.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_6.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_6.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_7.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_7.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_8.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_8.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_9.png",
+      "PackagePath": "staticwebassets\\images\\voters\\voter_9.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.VotingSystem.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.build.VotingSystem.props",
+      "PackagePath": "build\\VotingSystem.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.VotingSystem.props",
+      "PackagePath": "buildMultiTargeting\\VotingSystem.props"
+    },
+    {
+      "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.buildTransitive.VotingSystem.props",
+      "PackagePath": "buildTransitive\\VotingSystem.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

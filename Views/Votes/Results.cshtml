@@ -18,6 +18,12 @@
         margin: 0 auto;
     }
 
+    .count-table{
+        width: 100%;
+        max-width: 1200px !important;
+        margin-bottom: 20px;
+    }
+
     h2 {
         text-align: center;
         color: #0D6EFD;
@@ -139,63 +145,123 @@
         </div>
     </div>
 
-    <!-- Status Message -->
-    @if (ViewBag.SelectedElectionStatus == "Closed")
-    {
-        <h3 style="text-align:center; color:red; font-weight:bold;">This election is over.</h3>
-    }
-    else if (ViewBag.SelectedElectionStatus == "Upcoming")
-    {
-        <h3 style="text-align:center; color:orange; font-weight:bold;">This election hasn't started yet.</h3>
-    }
-    else if (Model.Any())
-    {
-        <!-- Candidate Table -->
-        @foreach (var areaGroup in Model.GroupBy(c => c.AreaName))
+    <div class="count-table">
+        @if (User.IsInRole("Voter"))
         {
-            <h3>@areaGroup.Key</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Candidate Name</th>
-                        <th>Party</th>
-                        <th>Election</th>
-                        <th>Area</th>
-                        <th>Total Votes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (!areaGroup.Any())
-                    {
-                        <tr>
-                            <td colspan="5" style="text-align:center;">No candidates available in this area.</td>
-                        </tr>
-                    }
-                    else
-                    {
-                        var maxVotes = areaGroup.Max(c => c.TotalVotes);
-
-                        @foreach (var candidate in areaGroup)
-                        {
-                            var isWinner = candidate.TotalVotes == maxVotes && candidate.TotalVotes > 0;
-
-                            <tr class="@(isWinner ? "winner" : "")">
-                                <td>@candidate.CandidateName</td>
-                                <td>@candidate.PartyName</td>
-                                <td>@candidate.ElectionName</td>
-                                <td>@candidate.AreaName</td>
-                                <td>@candidate.TotalVotes</td>
+            <!-- Status Message -->
+            @if (ViewBag.SelectedElectionStatus == "Closed")
+            {
+                <h3 style="text-align:center; color:red; font-weight:bold;">This election is over.</h3>
+            }
+            else if (ViewBag.SelectedElectionStatus == "Upcoming")
+            {
+                <h3 style="text-align:center; color:orange; font-weight:bold;">This election hasn't started yet.</h3>
+            }
+            else if (Model.Any())
+            {
+                <!-- Candidate Table -->
+                @foreach (var areaGroup in Model.GroupBy(c => c.AreaName))
+                {
+                    <h3>@areaGroup.Key</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Candidate Name</th>
+                                <th>Party</th>
+                                <th>Election</th>
+                                <th>Area</th>
+                                <th>Total Votes</th>
                             </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            @if (!areaGroup.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" style="text-align:center;">No candidates available in this area.</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                var maxVotes = areaGroup.Max(c => c.TotalVotes);
+
+                                @foreach (var candidate in areaGroup)
+                                {
+                                    var isWinner = candidate.TotalVotes == maxVotes && candidate.TotalVotes > 0;
+
+                                    <tr class="@(isWinner ? "winner" : "")">
+                                        <td>@candidate.CandidateName</td>
+                                        <td>@candidate.PartyName</td>
+                                        <td>@candidate.ElectionName</td>
+                                        <td>@candidate.AreaName</td>
+                                        <td>@candidate.TotalVotes</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h3>No candidates available.</h3>
+            }
         }
-    }
-    else
-    {
-        <h3>No candidates available.</h3>
-    }
+
+        else
+        {
+            <!-- Status Message -->
+            @if (Model.Any())
+            {
+                <!-- Candidate Table -->
+                @foreach (var areaGroup in Model.GroupBy(c => c.AreaName))
+                {
+                    <h3>@areaGroup.Key</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Candidate Name</th>
+                                <th>Party</th>
+                                <th>Election</th>
+                                <th>Area</th>
+                                <th>Total Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!areaGroup.Any())
+                            {
+                                <tr>
+                                    <td colspan="5" style="text-align:center;">No candidates available in this area.</td>
+                                </tr>
+                            }
+                            else
+                            {
+                                var maxVotes = areaGroup.Max(c => c.TotalVotes);
+
+                                @foreach (var candidate in areaGroup)
+                                {
+                                    var isWinner = candidate.TotalVotes == maxVotes && candidate.TotalVotes > 0;
+
+                                    <tr class="@(isWinner ? "winner" : "")">
+                                        <td>@candidate.CandidateName</td>
+                                        <td>@candidate.PartyName</td>
+                                        <td>@candidate.ElectionName</td>
+                                        <td>@candidate.AreaName</td>
+                                        <td>@candidate.TotalVotes</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+            else
+            {
+                <h3>No candidates available.</h3>
+            }
+        }
+    </div>
+
+    
 </div>
 
 @section Scripts {

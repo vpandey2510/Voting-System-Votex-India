@@ -1,0 +1,91 @@
+﻿@model IEnumerable<VotingSystem.Models.Feedback>
+
+<style>
+    body {
+        background-color: #f0f4f8; /* Light pastel blue */
+        color: #333;
+        font-family: 'Poppins', sans-serif !important;
+    }
+    /* Container and header styling */
+    .container {
+        width: 100%;
+        max-width: 1200px !important;
+        margin: 0 auto;
+    }
+    h2{
+        color: #0D6EFD; /* Pastel gray */
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+ 
+    /* Feedback List Container */
+    .feedback-list {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 2rem auto;
+        display: flex;
+        flex-wrap: wrap; /* Allow cards to wrap onto the next line */
+        margin-top: 20px; /* Space above the card container */
+        gap: 10px;
+    }
+
+        /* Individual Feedback Item */
+        .feedback-list .feedback-item {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 350px;
+        }
+
+            /* Feedback Item Hover Effect */
+            .feedback-list .feedback-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Feedback Name */
+            .feedback-list .feedback-item h5 {
+                margin: 0;
+                color: #333;
+                font-weight: bold;
+                font-size: 18px;
+            }
+
+            /* Feedback Message */
+            .feedback-list .feedback-item p {
+                margin: 0.5rem 0;
+                color: #555;
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            /* Feedback Username */
+            .feedback-list .feedback-item small {
+                color: #888;
+                font-size: 14px;
+                display: block;
+                margin-top: 1rem;
+                text-align: right;
+                font-style: italic;
+            }
+
+</style>
+
+<div class="container">
+    <h2>Feedbacks Recieved</h2>
+    <div class="feedback-list">
+        @foreach (var feedback in Model)
+        {
+            <div class="feedback-item">
+                <h5>@feedback.Name</h5>
+                <p>@feedback.Message</p>
+                <small>~ @feedback.Username</small>
+            </div>
+        }
+    </div>
+</div>

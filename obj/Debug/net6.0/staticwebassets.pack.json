@@ -129,6 +129,10 @@
       "PackagePath": "staticwebassets\\images\\candidates\\voter_4.png"
     },
     {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_10.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_10.png"
+    },
+    {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_3.png",
       "PackagePath": "staticwebassets\\images\\elections\\election_3.png"
     },
@@ -151,6 +155,10 @@
     {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_8.png",
       "PackagePath": "staticwebassets\\images\\elections\\election_8.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_9.png",
+      "PackagePath": "staticwebassets\\images\\elections\\election_9.png"
     },
     {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\lok_sabha.png",

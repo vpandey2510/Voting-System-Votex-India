@@ -32,7 +32,11 @@ section {
     margin-bottom: 20px;
 }
 
-.upcoming h2{
+.upcoming{
+    padding-bottom: 10px;
+}
+
+.upcoming h1{
     padding-top: 20px;
 }
 
@@ -52,6 +56,14 @@ section {
     padding: 10px;
     border-radius: 5px;
     font-family: 'Poppins', sans-serif !important;
+}
+    .carousel-caption p {
+        font-style: oblique;
+    }
+
+.upcoming {
+    background-color: #f5f7fa ;
+   
 }
 
 .scrollable-card-wrapper {
@@ -107,7 +119,7 @@ section {
 
 .home-card {
     flex: 0 0 auto; /* Prevent shrinking */
-    width: 300px; /* Card width */
+    width: 310px; /* Card width */
     height: 450px;
     background-color: #f9f9f9; /* Light background */
     border: 1px solid #ddd; /* Light border */
@@ -152,4 +164,19 @@ h3.card-title {
     color: #555;
     margin-bottom: 10px;
     text-align: center;
+}
+
+.feedback-section {
+    margin-top: 30px;
+}
+
+.feedback-form {
+    margin-bottom: 40px;
+}
+
+.feedback-list .feedback-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }

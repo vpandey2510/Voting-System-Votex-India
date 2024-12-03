@@ -1,0 +1,106 @@
+﻿@model VotingSystem.Models.Feedback
+
+<style>
+    /* Container for the Feedback Form */
+    .feedback-form-container {
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 2rem auto;
+    }
+
+        /* Heading */
+        .feedback-form-container h3 {
+            color: #444;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Form Labels */
+        .feedback-form-container label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Form Inputs and Textareas */
+        .feedback-form-container .form-control {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Textarea Specific Styling */
+        .feedback-form-container textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        /* Validation Messages */
+        .feedback-form-container .text-danger {
+            font-size: 14px;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* Submit Button */
+        .feedback-form-container .btn-primary {
+            background-color: #6c63ff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            /* Submit Button Hover Effect */
+            .feedback-form-container .btn-primary:hover {
+                background-color: #554ed8;
+                transform: translateY(-2px);
+            }
+
+            /* Submit Button Focus Effect */
+            .feedback-form-container .btn-primary:focus {
+                outline: none;
+                box-shadow: 0 0 5px 2px rgba(108, 99, 255, 0.5);
+            }
+
+</style>
+
+<div class="feedback-form-container">
+    <form asp-action="SubmitFeedback" asp-controller="Feedback" method="post">
+        <!-- Name Field -->
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" placeholder="Enter your name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label asp-for="Username">Email</label>
+            <input asp-for="Username" class="form-control" placeholder="Enter your email" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <!-- Message Field -->
+        <div class="form-group">
+            <label asp-for="Message">Enter your Message</label>
+            <textarea asp-for="Message" class="form-control" placeholder="Write your feedback here"></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </div>
+    </form>
+</div>

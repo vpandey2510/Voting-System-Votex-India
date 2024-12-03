@@ -127,7 +127,7 @@ namespace VotingSystem.Controllers
 
         
 
-        public async Task<IActionResult> GetTotalVotes(int? electionId = 1, int? areaId = null)
+        public async Task<IActionResult> GetTotalVotes(int? electionId = null, int? areaId = null)
         {
 
             // Retrieve the logged-in voter's AreaID (assuming you have a way to get the logged-in user)
@@ -183,9 +183,8 @@ namespace VotingSystem.Controllers
             return View("Results", candidates);
         }
 
-        public async Task<IActionResult> ElectionResult(int? electionId = 1, int? areaId = null)
+        public async Task<IActionResult> ElectionResult(int? electionId = null, int? areaId = null)
         {
-            // Query to get election results grouped by area and party
             var electionResultsQuery = _context.Votes
                 .Join(
                     _context.Candidates,
@@ -208,8 +207,8 @@ namespace VotingSystem.Controllers
                         AreaName = area.Name, // Area name
                         PartyName = vcp.party.Name, // Party name
                         CandidateName = vcp.candidate.Name, // Candidate name
-                        VoteCount = vcp.vote.CandidateID, // This will be counted later
-                        ElectionID = vcp.vote.ElectionID,// Add ElectionID here to filter by election
+                        VoteCount = vcp.vote.CandidateID, // This will be grouped later
+                        ElectionID = vcp.vote.ElectionID, // Add ElectionID here to filter by election
                         AreaID = vcp.candidate.AreaID,
                         PartyImage = vcp.party.FlagImagePath
                     }
@@ -226,19 +225,26 @@ namespace VotingSystem.Controllers
                 electionResultsQuery = electionResultsQuery.Where(v => v.AreaID == areaId);
             }
 
-            // Group by AreaName and PartyName, then count votes (no 'vote' object anymore after grouping)
-            var electionResults = await electionResultsQuery
-                .GroupBy(r => new { r.AreaName, r.PartyName, r.PartyImage })
+            // Group to calculate vote counts for each party in an area
+            var groupedResults = await electionResultsQuery
+                .GroupBy(r => new { r.AreaName, r.AreaID, r.PartyName, r.PartyImage, r.ElectionID })
                 .Select(g => new
                 {
+                    g.Key.AreaID,
                     g.Key.AreaName,
                     g.Key.PartyName,
                     g.Key.PartyImage,
-                    VoteCount = g.Count() // Count votes by group
+                    g.Key.ElectionID,
+                    TotalVotes = g.Count(), // Count votes for each party in the area
+                    Candidates = g.Select(c => c.CandidateName).Distinct().ToList() // List of candidates in the party
                 })
-                .OrderBy(r => r.AreaName)
-                .ThenByDescending(r => r.VoteCount)
                 .ToListAsync();
+
+            // Get the top party in each area based on vote count
+            var electionResults = groupedResults
+                .GroupBy(gr => new { gr.AreaID, gr.AreaName, gr.ElectionID })
+                .Select(g => g.OrderByDescending(gr => gr.TotalVotes).FirstOrDefault()) // Select top party by votes
+                .ToList();
 
             // Retrieve all areas and elections for dropdowns or filters
             var areas = await _context.Areas.ToListAsync();
@@ -255,9 +261,5 @@ namespace VotingSystem.Controllers
             // Return the grouped results to a view named "ElectionResults"
             return View("ElectionResult", electionResults);
         }
-
-
-
-
     }
 }

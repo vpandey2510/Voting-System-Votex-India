@@ -7,13 +7,12 @@
         color: #333;
     }
 
-    /* Container and header styling */
     .container {
         width: 100%;
         max-width: 1200px !important;
         margin: 0 auto;
     }
-    
+
     h2 {
         text-align: center;
         color: #0D6EFD; 
@@ -23,7 +22,7 @@
 
     h3 {
         text-align: center;
-        color: black; /* Pastel gray */
+        color: black;
         margin-top: 40px !important;
         margin-bottom: 20px !important;
     }
@@ -43,19 +42,18 @@
     .card-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center; /* Center align the cards */
-        gap: 20px; /* Spacing between cards */
+        justify-content: center;
+        gap: 20px;
         margin-top: 20px;
+        margin-bottom: 40px;
     }
 
     .card {
         background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
-        width: calc(33.333% - 20px); /* Ensure 3 cards per row */
-        max-width: 360px; /* Optional max width for cards */
-        flex: 1 1 calc(33.333% - 20px); /* Flex basis ensures responsiveness */
+        border: none;
+        width: calc(33.333% - 20px);
+        max-width: 360px;
+        flex: 1 1 calc(33.333% - 20px);
         padding: 10px;
     }
 
@@ -64,10 +62,11 @@
         }
 
     .card-img-top {
-        width: 100%;
+        margin-top: 5px;
+        width: 95%;
         height: 200px;
         object-fit: cover;
-        border-radius: 10px 10px 0 0;
+        border-radius: 10px 10px 10px 10px;
     }
 
     .card-body {
@@ -79,10 +78,10 @@
     }
 
     .winner-card {
-        border: 2px solid gold; /* Gold border for winner */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow */
+        border: 2px solid gold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        height: 350px;
     }
-
 </style>
 
 <div class="container">
@@ -107,6 +106,8 @@
                 }
             </select>
         </div>
+
+
 
         <div class="filter-group">
             <label for="areaFilter">Filter by Area:</label>
@@ -134,28 +135,27 @@
     }
     else if (ViewBag.SelectedElectionStatus == "Open")
     {
-        <h3>The election is ongoing. Result will be declared after voting finishes.</h3>
+        <h3>The election is ongoing. Results will be declared after voting finishes.</h3>
     }
     else
     {
-        @foreach (var areaGroup in Model.GroupBy(result => result.AreaName))
+        <div class="card-container">
+        @foreach (var result in Model)
         {
-            <h3>@areaGroup.Key</h3> <!-- Display Area Name as Header -->
-            <div class="card-container">
-                @foreach (var result in areaGroup.OrderByDescending(r => r.VoteCount))
-                {
-                    <div class="card">
-                        <img src="@result.PartyImage" class="card-img-top" alt="@result.PartyName" />
-                        <div class="card-body">
-                            <h5 class="card-title">@result.PartyName</h5>
-                            <p class="card-text">Vote Count: @result.VoteCount</p>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-    }
+                <div class="card">
 
+                    <h3>@result.AreaName</h3>
+                <div class="winner-card">
+                    <img src="@result.PartyImage" class="card-img-top" alt="@result.PartyName" />
+                    <div class="card-body">
+                        <h5 class="card-title">@result.PartyName</h5>
+                        <p class="card-text"><strong>Vote Count:</strong> @result.TotalVotes</p>
+                    </div>
+                </div>
+                </div>
+         }
+        </div>
+    }
 </div>
 
 @section Scripts {

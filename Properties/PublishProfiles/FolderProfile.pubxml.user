@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\VotingSystem</_PublishTargetUrl>
+    <History>True|2024-12-02T05:42:42.7006485Z||;False|2024-12-02T11:10:20.9509710+05:30||;False|2024-12-02T11:08:57.2736125+05:30||;True|2024-11-29T17:21:10.3597766+05:30||;True|2024-11-29T10:36:27.7019933+05:30||;True|2024-11-29T10:23:56.0207530+05:30||;</History>
+    <LastFailureDetails />
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=INBLRVM26590142%3bInitial Catalog=VotingDatabase%3bIntegrated Security=True%3bTrust Server Certificate=True</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="ApplicationDbContext">
+      <Value>Data Source=INBLRVM26590142%3bInitial Catalog=VotingDatabase%3bIntegrated Security=True%3bTrust Server Certificate=True</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
