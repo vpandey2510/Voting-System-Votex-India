@@ -29,6 +29,7 @@ namespace VotingSystem.Controllers
         }
 
         // GET: Candidates/Details/5
+        [Authorize(Roles = "Admin, Candidate, Voter")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Candidates == null)

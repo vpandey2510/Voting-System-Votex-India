@@ -94,7 +94,7 @@
     }
 </style>
 
-<div class="container mt-5">
+<div class="container mt-5" style="margin-bottom:50px">
     <h2 class="text-center text-primary">@ViewData["Title"]</h2>
 
     <div class="text-center mt-3">
@@ -114,10 +114,12 @@
             {
                 <div class="card">
                     <form asp-action="CastVote" method="post">
+                        <a href="@Url.Action("Details", "Candidates", new { id = candidate.CandidateID })" style="text-decoration: none;">
                         <input type="hidden" name="electionId" value="@ViewBag.ElectionId" />
                         <input type="hidden" name="candidateId" value="@candidate.CandidateID" />
 
                         <img class="card-img-top" src="@candidate.CandidateImagePath" alt="@candidate.Name">
+                        </a>
                         <div class="card-body">
                             <h5 class="card-title">@candidate.Name</h5>
                             <p class="card-text"><strong>Position:</strong> @candidate.Position</p>
@@ -125,14 +127,16 @@
                             <button type="submit" class="btn btn-primary">Vote for @candidate.Name</button>
                         </div>
                     </form>
+                    
                 </div>
             }
         </div>
     }
-</div>
 
 <div class="text-center mt-5">
     <button onclick="window.location.href='@Url.Action("Index", "Home")'" class="btn btn-secondary">
         Back to Home
     </button>
+</div>
+
 </div>

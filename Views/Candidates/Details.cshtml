@@ -128,7 +128,7 @@
         @if (User.IsInRole("Voter"))
         {
             <div class="mt-4">
-                <a href="@Url.Action("Index", "Candidates")" class="btn btn-secondary">Back to Candidates</a>
+                <a id="vote" href="@Url.Action("CastVoteForm", "Votes", new { electionId = @Model.ElectionID })" class="btn btn-primary">Back to Candidates</a>
             </div>
         }
     </div>

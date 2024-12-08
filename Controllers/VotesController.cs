@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using VotingSystem.Models;
@@ -34,7 +35,11 @@ namespace VotingSystem.Controllers
             var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
             var voter = await _context.Voters.FirstOrDefaultAsync(v => v.Username == userEmail);
 
-            if (voter == null || !voter.Eligible)
+            if (voter == null)
+            {
+                return Challenge();
+            }
+            else if (!voter.Eligible)
             {
                 return Unauthorized("You are not eligible to vote.");
             }
@@ -125,20 +130,8 @@ namespace VotingSystem.Controllers
             }
         }
 
-        
-
-        public async Task<IActionResult> GetTotalVotes(int? electionId = null, int? areaId = null)
+        public async Task<IActionResult> GetTotalVotes(int? electionId = 1, int? areaId = null)
         {
-
-            // Retrieve the logged-in voter's AreaID (assuming you have a way to get the logged-in user)
-            var loggedInVoterUsername = User.Identity.Name; // Assuming username is used for authentication
-            var loggedInVoter = await _context.Voters
-                .FirstOrDefaultAsync(v => v.Username == loggedInVoterUsername);
-
-            if (loggedInVoter != null && !areaId.HasValue)
-            {
-                areaId = loggedInVoter.AreaID; // Set the default areaId to the voter's AreaID
-            }
 
             var elections = await _context.Elections.ToListAsync();
             var areas = await _context.Areas.ToListAsync(); // Assuming areas are stored in Areas table

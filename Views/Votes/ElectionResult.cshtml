@@ -16,7 +16,7 @@
     h2 {
         text-align: center;
         color: #0D6EFD; 
-        margin-top: 20px;
+        margin-top: 40px;
         margin-bottom: 40px;
     }
 
@@ -92,7 +92,8 @@
         <div class="filter-group">
             <label for="electionFilter">Filter by Election:</label>
             <select id="electionFilter" onchange="applyFilters()" class="form-control">
-                <option value="" disabled>Select Election....</option>
+                <option value="">Select Election....</option>
+                
                 @foreach (var election in ViewBag.Elections)
                 {
                     if (ViewBag.SelectedElection == election.ElectionID)
@@ -129,7 +130,11 @@
     </div>
 
     <!-- Election Results Section -->
-    @if (!Model.Any())
+    @if (ViewBag.SelectedElection == null)
+    {
+        <h3>Please select any election to view results.</h3>
+    }
+    else if (!Model.Any())
     {
         <h3>No election results available.</h3>
     }
@@ -140,20 +145,19 @@
     else
     {
         <div class="card-container">
-        @foreach (var result in Model)
-        {
+            @foreach (var result in Model)
+            {
                 <div class="card">
-
                     <h3>@result.AreaName</h3>
-                <div class="winner-card">
-                    <img src="@result.PartyImage" class="card-img-top" alt="@result.PartyName" />
-                    <div class="card-body">
-                        <h5 class="card-title">@result.PartyName</h5>
-                        <p class="card-text"><strong>Vote Count:</strong> @result.TotalVotes</p>
+                    <div class="winner-card">
+                        <img src="@result.PartyImage" class="card-img-top" alt="@result.PartyName" />
+                        <div class="card-body">
+                            <h5 class="card-title">@result.PartyName</h5>
+                            <p class="card-text"><strong>Vote Count:</strong> @result.TotalVotes</p>
+                        </div>
                     </div>
                 </div>
-                </div>
-         }
+            }
         </div>
     }
 </div>
@@ -163,7 +167,9 @@
         function applyFilters() {
             const electionId = document.getElementById("electionFilter").value;
             const areaId = document.getElementById("areaFilter").value;
+            
             window.location.href = `/Votes/ElectionResult?electionId=${electionId}&areaId=${areaId}`;
         }
     </script>
 }
+

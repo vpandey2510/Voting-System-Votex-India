@@ -32,14 +32,6 @@ section {
     margin-bottom: 20px;
 }
 
-.upcoming{
-    padding-bottom: 10px;
-}
-
-.upcoming h1{
-    padding-top: 20px;
-}
-
 .carousel slide{
     width: 100%;
 }
@@ -61,10 +53,35 @@ section {
         font-style: oblique;
     }
 
-.upcoming {
-    background-color: #f5f7fa ;
-   
+.current {
+    background-color: #f5f7fa;
+    padding-bottom: 10px;
 }
+
+.current h2 {
+    font-family: 'Bugaki', sans-serif !important;
+    padding-top: 20px;
+}
+
+.upcoming {
+    background-color: #f5f7fa;
+    padding-bottom: 10px;
+}
+
+    .upcoming h2 {
+        font-family: 'Bugaki', sans-serif !important;
+        padding-top: 20px;
+    }
+
+.past {
+    background-color: #f5f7fa;
+    padding-bottom: 10px;
+}
+
+    .past h2 {
+        font-family: 'Bugaki', sans-serif !important;
+        padding-top: 20px;
+    }
 
 .scrollable-card-wrapper {
     position: relative;
@@ -165,6 +182,19 @@ h3.card-title {
     margin-bottom: 10px;
     text-align: center;
 }
+
+.vote .btn-primary {
+    background-color: #6c63ff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+   .vote .btn-primary:hover {
+        background-color: #5a55d6;
+    }
 
 .feedback-section {
     margin-top: 30px;

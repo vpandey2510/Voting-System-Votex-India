@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/bugaki');
+
 
 html {
     font-size: 14px;
@@ -31,18 +33,19 @@ body {
     padding: 15px 25px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    position: fixed;
-    top: 0;
+    position: fixed !important;
+    top: 0; /* Stick to the top */
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: 9999; /* Ensure it stays above other content */
     width: 100%;
     text-align: center;
+    margin-bottom: 50px !important;
 }
 
 /* Navbar Brand */
 .navbar-brand {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'Bugaki', sans-serif !important;
     font-weight: 800;
     font-size: 2rem !important;
     color: #6c757d; /* Dark grey for contrast */
@@ -135,43 +138,42 @@ body {
 
 .container {
     flex-grow: 1; /* Allow the content area to grow and take available space */
+    margin-top: 50px !important;
 }
 
 /* General Footer Styling */
 footer.footer2 {
-    background-color: #212529; /* Darker background */
+    background-color: #212529; /* Dark background */
     color: #ffffff; /* White text */
     padding: 20px 0;
     position: relative;
     bottom: 0;
+    text-align: center;
 }
 
 /* Ensure footer sticks to the bottom */
 html, body {
-   height: 100%;  /* Full height for body and html */
+    height: 100%; /* Full height for body and html */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer2 .container {
+    background-color: #212529; /* Dark background */
 }
 
 .container.flex-grow-1 {
-    flex: 1; /* Make the main content take up remaining vertical space */
-    /*margin: 20px 10px auto 10px;*/
+    flex-grow: 1; /* Make the main content take up remaining vertical space */
 }
 
 /* Footer Content Styling */
-footer.footer2 .container {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif !important;
-    background-color: #212529;
-    height: 100px !important;
-}
-
 footer.footer2 p {
     margin: 0;
     font-size: 14px;
-    text-align: center;
 }
 
 footer.footer2 ul {
@@ -203,6 +205,7 @@ footer.footer2 ul {
     footer.footer2 .container {
         flex-direction: column;
         text-align: center;
+        background-color: #212529; /* Dark background */
     }
 
     footer.footer2 ul {

@@ -17,6 +17,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\fonts\\Bugaki Oblique.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Bugaki Oblique.ttf"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\fonts\\Bugaki.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Bugaki.ttf"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\fonts\\readme.txt",
+      "PackagePath": "staticwebassets\\fonts\\readme.txt"
+    },
+    {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\areas\\Andhra_Constituency.png",
       "PackagePath": "staticwebassets\\images\\areas\\Andhra_Constituency.png"
     },
@@ -125,10 +137,6 @@
       "PackagePath": "staticwebassets\\images\\candidates\\candidate_9.png"
     },
     {
-      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\candidates\\voter_4.png",
-      "PackagePath": "staticwebassets\\images\\candidates\\voter_4.png"
-    },
-    {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\elections\\election_10.png",
       "PackagePath": "staticwebassets\\images\\elections\\election_10.png"
     },
@@ -195,6 +203,18 @@
     {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\flags\\Test_flag.png",
       "PackagePath": "staticwebassets\\images\\flags\\Test_flag.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\map.svg",
+      "PackagePath": "staticwebassets\\images\\map.svg"
+    },
+    {
+      "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\map_txt.txt",
+      "PackagePath": "staticwebassets\\images\\map_txt.txt"
     },
     {
       "Id": "C:\\Users\\vaspande\\source\\repos\\VotingSystem\\VotingSystem\\wwwroot\\images\\voters\\voter_1.png",
