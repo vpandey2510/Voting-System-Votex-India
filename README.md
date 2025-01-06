@@ -52,7 +52,7 @@ Votex India is a robust Online Voting System designed to ensure secure, anonymou
 
 **Usage**
 
-    *Admin:*
+   *Admin:*
         
           Log in using admin credentials.
           
@@ -60,13 +60,13 @@ Votex India is a robust Online Voting System designed to ensure secure, anonymou
           
           View and manage results.
         
-    *Voter:*
+   *Voter:*
         
           Register and log in.
           
           Cast a vote during an open election.
         
-    *Candidate:*
+   *Candidate:*
         
           Register as a candidate.
           
