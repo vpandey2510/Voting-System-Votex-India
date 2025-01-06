@@ -8,29 +8,29 @@ Votex India is a robust Online Voting System designed to ensure secure, anonymou
 
 1. User Roles:
 
-  *Admin:*
-  
-    Create and manage elections.
-  
-    Manage candidates and verify their eligibility.
-  
-    Manage political parties.
-  
-    View election results.
-  
-  *Voter:*
-  
-    Register and log in to the platform.
+    *Admin:*
     
-    Vote anonymously in elections.
+      Create and manage elections.
     
-    View election results and announcements.
-  
-  *Candidate:*
-  
-    Register as a candidate for elections.
+      Manage candidates and verify their eligibility.
     
-    Participate in elections once verified by the admin.
+      Manage political parties.
+    
+      View election results.
+    
+    *Voter:*
+    
+      Register and log in to the platform.
+      
+      Vote anonymously in elections.
+      
+      View election results and announcements.
+    
+    *Candidate:*
+    
+      Register as a candidate for elections.
+      
+      Participate in elections once verified by the admin.
 
 2. Key Functionalities:
 
