@@ -34,40 +34,52 @@ Votex India is a robust Online Voting System designed to ensure secure, anonymou
 
 2. Key Functionalities:
 
-  Secure and anonymous voting process.
-  
-  Results displayed only after the election concludes.
-  
-  Group candidates by areas and display results accordingly.
-  
-  Ensure only verified users can participate in elections.
+        Secure and anonymous voting process.
+        
+        Results displayed only after the election concludes.
+        
+        Group candidates by areas and display results accordingly.
+        
+        Ensure only verified users can participate in elections.
 
 **Tech Stack**
 
-  Frontend: Angular
-  
-  Backend: C#, .NET Core, ASP.NET Core
-  
-  Database: SQL, Entity Framework
+        Frontend: Angular
+        
+        Backend: C#, .NET Core, ASP.NET Core
+        
+        Database: SQL, Entity Framework
 
 **Usage**
 
-  *Admin:*
-  
-    Log in using admin credentials.
-    
-    Create elections and verify candidates.
-    
-    View and manage results.
-  
-  *Voter:*
-  
-    Register and log in.
-    
-    Cast a vote during an open election.
-  
-  *Candidate:*
-  
-    Register as a candidate.
-    
-    Wait for admin verification.
+    *Admin:*
+        
+          Log in using admin credentials.
+          
+          Create elections and verify candidates.
+          
+          View and manage results.
+        
+    *Voter:*
+        
+          Register and log in.
+          
+          Cast a vote during an open election.
+        
+    *Candidate:*
+        
+          Register as a candidate.
+          
+          Wait for admin verification.
+
+**Contact**
+
+For any queries or issues, feel free to reach out:
+
+Name: Vasundhara Pandey
+
+Email: vasundhara.2510@gmail.com
+
+GitHub: https://github.com/vpandey2510
+
+
